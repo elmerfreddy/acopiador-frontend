@@ -23,4 +23,8 @@
     border-radius: 5px;
     padding: 40px;
 }
+
+.form-label{
+    padding-right: 2%;
+}
 </style>

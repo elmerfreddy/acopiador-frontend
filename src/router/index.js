@@ -24,6 +24,16 @@ const routes = [
     path: '/recover',
     name: 'recover',
     component: () => import(/* webpackChunkName: "about" */ '../views/RecoverView.vue')
+  },
+  {
+    path: '/retrieve',
+    name: 'retrieve',
+    component: () => import(/* webpackChunkName: "about" */ '../views/RetrieveView.vue')
+  },
+  {
+    path: '/hom',
+    name: 'hom',
+    component: () => import(/* webpackChunkName: "about" */ '../views/HomView.vue')
   }
 ]
 

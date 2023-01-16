@@ -1,15 +1,14 @@
 <template>
     <div class="login" >
         <h4>Iniciar Sesión</h4>
-        <form  class="form" @submit.prevent="Submit">
-            <label for="" class="usu">Usuario</label>
-            <input  class="nom" type="text" v-model="form.usuario" required>
+        <form  class="form">
+            <label class="fron-label-1" for="text" >Usuario</label>
+            <input  class="forn-input" type="text">
             <br><br>
-            <label class=cont for="">Contraseña</label>
-            <input  class="contr" type="text" v-model="form.contraseña" required>
+            <label class="fron-label" for="text">Contraseña</label>
+            <input  class="forn-input" type="text">
             <br><br>
             <button type="submit">Ingresar</button>
-            <br>
         </form>
     </div>
 </template>
@@ -36,10 +35,17 @@ form{
     margin: 3rem auto;
     justify-content: center;
     width: 20%;
-    min-width: 30%;
+    min-width: 35%;
     max-width: 100%;
     background: wheat;
     border-radius: 5px;
     padding: 40px;
+}
+.fron-label{
+    padding: 2%;
+}
+.fron-label-1{
+    padding: 2%;
+    padding-left: 9%;
 }
 </style>
