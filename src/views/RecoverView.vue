@@ -1,30 +1,22 @@
 <template>
-    <div class="recover">
-        <h4 class="title">Recuperar Contraseña</h4>
-        <form class="form">
-            <label  class="form-label" for="text">Usuario</label>
-            <input class="form-input" type="text">
-            <button class="form-submit" type="submit">Enviar</button>
-        </form>
-    </div>
+    <h4 class="title">Recuperar Contraseña</h4>
+    <form>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Usuario</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
 </template>
 
 <style >
-.login{
-    padding: 9rem;
-}
-.form{
+form{
     margin: 3rem auto;
-    justify-content: center;
     width: 20%;
     min-width: 30%;
     max-width: 100%;
     background: wheat;
     border-radius: 5px;
     padding: 40px;
-}
-
-.form-label{
-    padding-right: 2%;
 }
 </style>

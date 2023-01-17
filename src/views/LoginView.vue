@@ -1,39 +1,39 @@
 <template>
-    <div class="login" >
-        <h4>Iniciar Sesión</h4>
-        <form  class="form">
-            <label class="fron-label-1" for="text" >Usuario</label>
-            <input  class="forn-input" type="text">
-            <br><br>
-            <label class="fron-label" for="text">Contraseña</label>
-            <input  class="forn-input" type="text">
-            <br><br>
-            <button type="submit">Ingresar</button>
-        </form>
-    </div>
+    <h4>Iniciar Sesión</h4>
+    <form>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Usuario</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <a href="#">Olvidó su Contraseña?</a>
+    </form>
 </template>
 <script>
-export default{
-    data(){
-        return{
-            form:{
-                usuario:"",
-                contraseña:"",
+export default {
+    data() {
+        return {
+            form: {
+                usuario: "",
+                contraseña: "",
             }
         }
     },
-    methods:{
-        submit(){
-            this.$store.commit('login',this.form.usuario)
+    methods: {
+        submit() {
+            this.$store.commit('login', this.form.usuario)
         }
 
     }
 }
 </script>
 <style>
-form{
+form {
     margin: 3rem auto;
-    justify-content: center;
     width: 20%;
     min-width: 35%;
     max-width: 100%;
@@ -41,10 +41,12 @@ form{
     border-radius: 5px;
     padding: 40px;
 }
-.fron-label{
+
+.fron-label {
     padding: 2%;
 }
-.fron-label-1{
+
+.fron-label-1 {
     padding: 2%;
     padding-left: 9%;
 }

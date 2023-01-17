@@ -1,7 +1,6 @@
 <template>
   <nav>
-    <h3>Sistema De Informacion</h3>
-    <h4>Iniciar Sesión</h4>
+    <h3>Sistema de Información</h3>
   </nav>
   <router-view/>
 </template>
