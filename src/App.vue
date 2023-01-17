@@ -1,41 +1,18 @@
 <template>
-  <nav>
-    <h3>Sistema de Información</h3>
-  </nav>
-  <router-view/>
+  <v-app>
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav h1,h2 {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
 <script>
-export default{
-  methods:{
-    logout(){
-      this.$store.commit('logout')
-    }
-  },
-  mounted(){
-    this.$store.commit('initializeStore')
-  }
+
+export default {
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
 }
 </script>
