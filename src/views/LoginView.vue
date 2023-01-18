@@ -29,7 +29,7 @@
                     v => !!v || 'Nombre de Usuario Requerido'
                 ],
                 RepiteContraseña:[
-                    v => !!v || 'Repetite la contraseña'
+                    v => !!v || 'Repite la contraseña'
                 ]
             }
         }
