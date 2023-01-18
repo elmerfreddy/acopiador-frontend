@@ -35,7 +35,7 @@
                     v => !!v || 'Contraseña nueva Requerido'
                 ],
                 RepiteContraseña:[
-                    v => !!v || 'Vuelva a colocar la contraseña'
+                    v => !!v || 'Vuelve a colocar la contraseña'
                 ]
             }
         }
