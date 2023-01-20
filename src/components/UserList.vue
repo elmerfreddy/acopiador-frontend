@@ -17,6 +17,7 @@
                         </v-card-title>
 
                         <v-card-text>
+                            
                             <v-container>
                                 <v-row>
                                     <v-col cols="12" sm="6" md="4">
@@ -67,12 +68,16 @@
         </template>
         <template v-slot:item.actions="{ item }">
             <v-icon size="small" class="me-2" @click="editItem(item.raw)">
+                mdi-eye
+            </v-icon>
+            <v-icon size="small" class="me-2" @click="editItem(item.raw)">
                 mdi-pencil
             </v-icon>
             <v-icon size="small" @click="deleteItem(item.raw)">
                 mdi-delete
             </v-icon>
         </template>
+        
         <template v-slot:no-data>
             <v-btn color="primary" @click="initialize">
                 Reestablecer
@@ -163,7 +168,7 @@ export default {
                 },
             ]
         },
-
+        
         editItem(item) {
             this.editedIndex = this.desserts.indexOf(item)
             this.editedItem = Object.assign({}, item)
