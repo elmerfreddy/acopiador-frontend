@@ -11,7 +11,7 @@
                       <v-col cols="12" md="11">
                         <v-card-text class="mt-0">
                           <h1
-                            class=" color text-center display-2 teal--text text--accent-3"
+                            class=" color text-center display-2 darken-4text"
                           >Perfil de Usuario</h1>
                           <br>
                           <label for="exampleInputEmail1" class="form-label"> Nombre:</label>
@@ -93,6 +93,10 @@
 .col{
     color:rgba(80, 35, 20, 0.8);
     padding-right: 50%;
+}
+.color{
+    color:rgba(80, 35, 20, 0.8);
+   
 }
 .h4{
     padding: 10%
