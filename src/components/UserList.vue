@@ -17,7 +17,7 @@
                         </v-card-title>
 
                         <v-card-text>
-                            
+
                             <v-container>
                                 <v-row>
                                     <v-col cols="12" sm="6" md="4">
@@ -40,6 +40,7 @@
                                     </v-col>
                                 </v-row>
                             </v-container>
+                            
                         </v-card-text>
 
                         <v-card-actions>
@@ -52,6 +53,7 @@
                             </v-btn>
                         </v-card-actions>
                     </v-card>
+                    
                 </v-dialog>
                 <v-dialog v-model="dialogDelete" max-width="500px">
                     <v-card>
@@ -67,9 +69,81 @@
             </v-toolbar>
         </template>
         <template v-slot:item.actions="{ item }">
-            <v-icon size="small" class="me-2" @click="editItem(item.raw)">
-                mdi-eye
-            </v-icon>
+
+            <v-dialog  max-width="500px">
+                    <template v-slot:activator="{ props }">
+                        <v-icon size="small" class="me-2" v-bind="props">
+                           mdi-eye
+                        </v-icon>
+                    </template>
+                    
+                            <v-container class="fill-height" fluid>
+                             <v-row align="center" justify="center">
+                            <v-col cols="12" sm="8" md="9">
+                                <v-card class="elevation-12">
+                                    <v-window v-model="step">
+                                            <v-row>
+                                                <v-col cols="12" md="11">
+                                                    <v-card-text class="mt-0">
+                                                        <h1
+                                                         class=" color text-center display-2 darken-4text"
+                                                        >Perfil de Usuario</h1>
+                                                        <br>
+                                                        <label for="exampleInputEmail1" class="form-label"> Nombre:</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                        placeholder="defreddyelmer@gmail.com">
+                                                        <br>
+                                                        <label for="exampleInputEmail1" class="form-label">Apellido:</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                        placeholder="defreddyelmer@gmail.com">
+                                                        <br>
+                                                        <label for="exampleInputEmail1" class="form-label">Entidad:</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                        placeholder="defreddyelmer@gmail.com">
+                                                        <v-divider ></v-divider>
+                                                        <h4
+                                                        class=" col text-left display-2 teal--text text--accent-3"
+                                                        >Cambiar Contraseña</h4>
+                                                        <v-form>
+                                                            <v-text-field
+                                                                label="Anterior Contraseña"
+                                                                name="Anterior Contraseña"
+                                                                prepend-icon="email"
+                                                                type="text"
+                                                                color="brown darken-4"
+                                                            />
+  
+                                                            <v-text-field
+                                                                id="password"
+                                                                label="Nueva Contraeña"
+                                                                name="Nueva Contraeña"
+                                                                prepend-icon="lock"
+                                                                type="password"
+                                                                color="brown darken-4"
+                                                            />
+
+                                                            <v-text-field
+                                                                id="password"
+                                                                label="Repita Nueva Contraseña"
+                                                                name="Repita Nueva Contraseña"
+                                                                prepend-icon="lock"
+                                                                type="password"
+                                                                color="brown darken-4"
+                                                            />
+                                                        </v-form>
+                                                    </v-card-text>
+                                                    <div class="text-center mt-1">
+                                                        <v-btn rounded color="red darken-2" dark>Guardar</v-btn>
+                                                    </div>
+                                                </v-col>
+                                            </v-row>
+                                       
+                                    </v-window>
+                                </v-card>
+                            </v-col>
+                            </v-row>
+                            </v-container>            
+            </v-dialog>
             <v-icon size="small" class="me-2" @click="editItem(item.raw)">
                 mdi-pencil
             </v-icon>
@@ -87,6 +161,7 @@
 </template>
 
 <script>
+
 export default {
     data: () => ({
         dialog: false,
@@ -126,11 +201,17 @@ export default {
             entidad: "",
             cargo: "",
         },
-    }),
+        vistaItem:{
+            nombres: '',
+            apellidos: '',
+            entidad: "",
+        }
 
+    }),
+ 
     computed: {
         formTitle() {
-            return this.editedIndex === -1 ? 'Nuevo Usuario' : 'Editar Usuario'
+            return this.editedIndex === 1 ? 'Nuevo Usuario' : 'Editar Usuario'
         },
     },
 
@@ -168,7 +249,6 @@ export default {
                 },
             ]
         },
-        
         editItem(item) {
             this.editedIndex = this.desserts.indexOf(item)
             this.editedItem = Object.assign({}, item)
@@ -185,6 +265,7 @@ export default {
             this.desserts.splice(this.editedIndex, 1)
             this.closeDelete()
         },
+
 
         close() {
             this.dialog = false
@@ -211,5 +292,6 @@ export default {
             this.close()
         },
     },
+    
 }
 </script>
