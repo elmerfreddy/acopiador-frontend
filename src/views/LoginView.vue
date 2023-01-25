@@ -1,78 +1,70 @@
 <template>
-    
     <v-app>
-        <v-form class="form">
-            <h4>Iniciar Sesión</h4>
-            <br>
-            <div class="login">
-                <v-text-field label="Usuario" :counter="10" :rules="nameContraseña" required  prepend-icon=" mdi-account"></v-text-field>
-            </div>
-        
-            <div class="login">
-                <v-text-field label="Contraseña"  :rules="RepiteContraseña" :type="show?'text':'password'" required hint="Contraseña requerido" prepend-icon=" mdi-lock"  ></v-text-field>
-            </div>
-                <v-btn  class="botton" >Ingresar</v-btn>
-            <br> <br>
-             <a href="#">Olvidó su Contraseña?</a>
-        </v-form>       
+        <div class="background"></div>  
+        <v-main class="d-flex justify-center align-center">
+            <v-col cols="4" lg="4" class="mx-auto">
+                <v-card class="pa-5">
+                    <div class="text-center">
+                        <v-img 
+                        lazy-src="@/assets/img/logomaker.jpg"
+                        max-height="63"
+                        max-width="500"
+                        src="@/assets/img/logomaker.jpg">
+                        </v-img>
+                        <v-car >
+                          <h2>Iniciar Sesión</h2>
+                        </v-car>
+                    </div>
+                    <v-form>
+                        <v-card-text>
+                            <v-text-field
+                                type="username"
+                                label="Username"
+                                placeholder="Username"
+                                prepend-inner-icon="mdi-account"
+                            />
+                            <v-text-field
+                                    
+                                    :type="passwordShow? 'text':'password'"
+                                    label="Password"
+                                    placeholder="Password"
+                                    prepend-inner-icon="mdi-key"
+                                    :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
+                                    @click:append="passwordShow = !passwordShow"
+                            />
+                            <a href="">Olvidó su contraseña?</a>
+                        </v-card-text>
+                        
+
+                        <v-card-actions  class="justify-center">
+                        <v-btn
+                         color="primary"
+                         :disabled="!form"
+                         variant="elevated"
+                         
+                        >
+                         Button
+                        </v-btn>
+
+                        </v-card-actions>
+                    </v-form>
+                </v-card>
+            </v-col>
+        </v-main> 
     </v-app>
 </template>
 <script>
-    export default{
-        data(){
-            return{
-                valida:true,
-                contraseña:'',
-                repiteContraseña:'',
-                show:false,
-                nameContraseña:[
-                    v => !!v || 'Nombre de Usuario Requerido'
-                ],
-                RepiteContraseña:[
-                    v => !!v || 'Repite la contraseña'
-                ]
-            }
-        }
-    }
+export default{
+    name:'App',
+
+    data:()=>({
+        passwordShow:false,
+            
+        }),
+};
+
+
 </script>
 <style>
-form {
-    margin: 8rem auto;
-    width: 20%;
-    min-width: 35%;
-    max-width: 100%;
-    background: rgba(245, 235, 220);
-    border-radius: 20px;
-    padding: 10px; 
-}
-a{  
-    text-align: center;
-    color: #D62300;
-}
-h4{
-    text-align: center;
-    color: #502314;
-
-}
-.fron-label {
-    padding: 7%;
-}
-
-.fron-label-1 {
-    padding: 2%;
-    padding-left: 9%;
-}
-.botton{
-    top:5% ;
-    left: 35%;
-    right: 5%;
-    bottom: 60%;
-    padding-right:5%;
-    color:white;
-    background-color:#f72700;
-}
-.login{
-    color: rgba(80, 35, 20, 0.6);
-}
-
+ 
 </style>
