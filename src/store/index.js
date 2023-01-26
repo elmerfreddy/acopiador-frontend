@@ -1,30 +1,29 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    usuario:"",
+    usuario: "",
   },
-  getters: {
-  },
+
+  getters: {},
+
   mutations: {
-    login(state,usuario){
+    login(state, usuario) {
       state.usuario = usuario;
-      localStorage.setItem('usuario',usuario);
-      alert('Logged in');
+      localStorage.setItem("usuario", usuario);
     },
-    logout(state){
-      state.usuario="";
-      localStorage.removeItem('usuario');
-      alert('logged out');
+    logout(state) {
+      state.usuario = "";
+      localStorage.removeItem("usuario");
     },
-    initializeStore(state){
-      if(localStorage.getItem('usuario')){
-        state.usuario = localStorage.getItem('usuario');
+    initializeStore(state) {
+      if (localStorage.getItem("usuario")) {
+        state.usuario = localStorage.getItem("usuario");
       }
-    }
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
-})
+
+  actions: {},
+
+  modules: {},
+});

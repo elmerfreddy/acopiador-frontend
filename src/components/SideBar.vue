@@ -6,9 +6,9 @@
     ></v-app-bar-nav-icon>
     <v-toolbar-title>Sistema Reportes Estadísticos</v-toolbar-title>
     <v-spacer></v-spacer>
-    <template v-slot:append>
+    <template v-slot:append v-if="$store.state.usuario">
       <div class="pa-2">
-        <v-btn block> Cerrar sesión </v-btn>
+        <v-btn block @click="logout">Cerrar sesión</v-btn>
       </div>
     </template>
   </v-app-bar>
@@ -48,6 +48,12 @@ export default {
   watch: {
     group() {
       this.drawer = false;
+    },
+  },
+
+  methods: {
+    logout() {
+      this.$store.commit('logout');
     },
   },
 };

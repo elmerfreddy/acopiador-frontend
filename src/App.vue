@@ -8,8 +8,18 @@
   </v-app>
 </template>
 
-<script setup>
+<script>
 import SideBar from "./components/SideBar.vue";
 import FooterBar from "./components/FooterBar.vue";
-</script>
 
+export default {
+  mounted() {
+    this.$store.commit("initializeStore");
+  },
+
+  components: {
+    SideBar,
+    FooterBar,
+  },
+};
+</script>
