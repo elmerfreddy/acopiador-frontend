@@ -1,20 +1,22 @@
 <template>
-   <v-col
-   col="11"
-    md="11"
-    >
-    <v-card-title>Cambiar Contraseña</v-card-title>
-    <v-form>
-        <v-text-field label="Anterior Contraseña" name="Anterior Contraseña" prepend-icon="email" type="text"
-            color="brown darken-4" />
+    <v-col col="11" md="11">
+        <v-card-title>Cambiar Contraseña</v-card-title>
+        <v-form>
+            <v-text-field label="Anterior Contraseña" name="Anterior Contraseña" prepend-icon="email" type="text"
+                color="brown darken-4" />
 
-        <v-text-field id="password" label="Nueva Contraeña" name="Nueva Contraeña" prepend-icon="lock" type="password"
-            color="brown darken-4" />
+            <v-text-field id="password" label="Nueva Contraeña" name="Nueva Contraeña" prepend-icon="lock"
+                type="password" color="brown darken-4" />
 
-        <v-text-field id="password" label="Repita Nueva Contraseña" name="Repita Nueva Contraseña" prepend-icon="lock"
-            type="password" color="brown darken-4" />
-    </v-form>
-   </v-col>
+            <v-text-field id="password" label="Repita Nueva Contraseña" name="Repita Nueva Contraseña"
+                prepend-icon="lock" type="password" color="brown darken-4" />
+        </v-form>
+        <v-card-actions class="justify-center">
+            <v-btn color="primary" :disabled="!form" variant="elevated">
+                Guardar
+            </v-btn>
+        </v-card-actions>
+    </v-col>
 </template>
 <script>
 export default {
