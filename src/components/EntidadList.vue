@@ -17,7 +17,7 @@
                         <v-spacer></v-spacer>
                         <v-text-field 
                         color="primary" 
-                        v-model="search" 
+                        v-model="search"
                         append-icon="mdi-magnify" 
                         label="Buscar">
                         </v-text-field>
@@ -43,7 +43,7 @@
                                     </v-col>
                                 </v-row>
                                 <v-combobox label="Nivel de Acceso"
-                                    :items="['Tipo A', 'Tipo B', 'Tipo C', 'Tipo D', 'Tipo E',]">
+                                    :items="['Nivel 1-Administrador', 'Nivel 2-Acceder a toda la información', 'Nivel 3-Datos de su entidad',]">
                                 </v-combobox>
                             </v-container>
 
@@ -95,12 +95,14 @@
                             </v-col>
                             <v-col>
                                 <v-combobox label="Conjuntos de datos"
-                                    :items="['Tipo A', 'Tipo B', 'Tipo C', 'Tipo D', 'Tipo E',]">
+                                    :items="['Estadistica de Edades', 'Población de varones', 
+                                             'Población de mujeres', 'Población de niños', 'Población de adolescentes',
+                                             'Generacional (género)','Etnia',]">
                                 </v-combobox>
                             </v-col>
                             <v-col>
                                 <v-combobox label="Nivel de desagregación"
-                                    :items="['Tipo A', 'Tipo B', 'Tipo C', 'Tipo D', 'Tipo E',]">
+                                    :items="['Nacional','Departamental', 'Municipal',]">
                                 </v-combobox>
                             </v-col>
                             <v-card-actions class="justify-center">
@@ -197,7 +199,7 @@ export default {
     methods: {
 
         initialize() {
-            search: '',
+           
                 this.desserts = [
                     {
                         name: 'Entidad 1',

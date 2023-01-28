@@ -1,17 +1,28 @@
 <template>
     
-    <v-data-table :headers="headers" :items="desserts" class="elevation-1">
+    <v-data-table :headers="headers" :items="desserts" class="elevation-1" :search="search">
         <template v-slot:top>
-            <v-toolbar flat>
+            <v-toolbar>
                 <v-toolbar-title>Lista de Usuarios</v-toolbar-title>
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <v-spacer></v-spacer>
-              
+             </v-toolbar>
+            <v-toolbar flat>
                 <v-dialog v-model="dialog" max-width="500px">
                     <template v-slot:activator="{ props }">
-                        <v-btn color="primary" dark class="mb-2" v-bind="props">
-                            Crear Usuario
-                        </v-btn>
+                        <v-card-actions class="px-4 pb-3">
+                            <v-btn variant="elevated" color="primary" dark v-bind="props" :class="center">
+                                Crear
+                            </v-btn>
+                        </v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-spacer></v-spacer>
+                        <v-text-field 
+                            v-model="search"
+                            class="px-16"
+                            color="primary" 
+                            append-icon="mdi-magnify" 
+                            label="Buscar">
+                        </v-text-field>
+             
                     </template>
                     <v-card>
                         <v-card-title>
@@ -41,6 +52,7 @@
                                         <v-text-field v-model="editedItem.cargo" label="Cargo"></v-text-field>
                                     </v-col>
                                 </v-row>
+
                             </v-container>
                             
                         </v-card-text>
@@ -86,13 +98,13 @@
                                             <v-card-text class="mt-0">
                                                <v-col   >
                                                
-                                                    <v-text-field v-model="muestraItem.nombres" label="Nombre(s)"></v-text-field>
+                                                    <v-text-field v-model="muestraItem.nombres" label="Nombre(s)" readonly ></v-text-field>
                                                 </v-col>
                                                 <v-col >
-                                                    <v-text-field v-model="muestraItem.apellidos" label="Apellido(s)"></v-text-field>
+                                                    <v-text-field v-model="muestraItem.apellidos" label="Apellido(s)" readonly ></v-text-field>
                                                 </v-col>
                                                 <v-col >
-                                                    <v-text-field v-model="muestraItem.cargo" label="Cargo"></v-text-field>
+                                                    <v-text-field v-model="muestraItem.cargo" label="Cargo" readonly ></v-text-field>
                                                 </v-col>         
                                                 <v-divider ></v-divider>
                                               
@@ -125,6 +137,7 @@ import CambiarPassword from "./CambiarPassword.vue"
 export default {
     data: () => ({
         dialog: false,
+        search: '',
         dialogDelete: false,
         headers: [
             {
