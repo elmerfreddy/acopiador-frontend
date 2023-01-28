@@ -42,6 +42,7 @@ export default {
     items: [
       { title: "Home", icon: "mdi-view-dashboard", path: "/" },
       { title: "Usuarios", icon: "mdi-account-box", path: "/users" },
+      { title: "Entidades", icon: "mdi-office-building-outline", path: "/entidad" },
     ],
   }),
 

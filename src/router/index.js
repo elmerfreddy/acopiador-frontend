@@ -35,9 +35,29 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/HomView.vue')
   },
   {
+    path: '/lista',
+    name: 'lista',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ListaView.vue')
+  },
+  {
+    path: '/crear',
+    name: 'crear',
+    component: () => import(/* webpackChunkName: "about" */ '../views/CrearView.vue')
+  },
+  {
+    path: '/perfil',
+    name: 'perfil',
+    component: () => import(/* webpackChunkName: "about" */ '../views/PerfilView.vue')
+  },
+  {
     path: '/users',
     name: 'users',
     component: () => import(/* webpackChunkName: "about" */ '../components/UserList.vue')
+  },
+  {
+    path: '/entidad',
+    name: 'entidad',
+    component: () => import(/* webpackChunkName: "about" */ '../components/EntidadList.vue')
   }
 ]
 
