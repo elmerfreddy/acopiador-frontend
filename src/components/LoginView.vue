@@ -43,13 +43,13 @@
           </v-form>
         </v-card>
         <v-img
-              lazy-src="@/assets/img/logomaker.jpg"
-              max-height="63"
-              max-width="500"
-              src="@/assets/img/logomaker.jpg"
-              class="mt-8"
-            >
-            </v-img>
+          lazy-src="@/assets/img/logomaker.jpg"
+          max-height="63"
+          max-width="500"
+          src="@/assets/img/logomaker.jpg"
+          class="mt-8"
+        >
+        </v-img>
       </v-col>
     </v-main>
   </v-app>
@@ -68,7 +68,7 @@ export default {
   methods: {
     Submit() {
       this.$store.commit("login", this.form.usuario);
-      this.$router.push('/');
+      this.$router.push("/");
     },
   },
 };

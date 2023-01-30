@@ -42,7 +42,11 @@ export default {
     items: [
       { title: "Home", icon: "mdi-view-dashboard", path: "/" },
       { title: "Usuarios", icon: "mdi-account-box", path: "/usuarios" },
-      { title: "Entidades", icon: "mdi-office-building-outline", path: "/entidades" },
+      {
+        title: "Entidades",
+        icon: "mdi-office-building-outline",
+        path: "/entidades",
+      },
     ],
   }),
 
@@ -54,8 +58,8 @@ export default {
 
   methods: {
     logout() {
-      this.$store.commit('logout');
-      this.$router.push('/login');
+      this.$store.commit("logout");
+      this.$router.push("/login");
     },
   },
 };
