@@ -68,7 +68,7 @@ export default {
   methods: {
     Submit() {
       this.$store.commit("login", this.form.usuario);
-      this.$router.push("/");
+      this.$router.push({ name: "dashboard" });
     },
   },
 };

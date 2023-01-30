@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="entidades"
     class="elevation-1"
     :search="search"
   >
@@ -18,7 +18,7 @@
                 color="primary"
                 dark
                 v-bind="props"
-                :class="center"
+                class="center"
               >
                 Crear
               </v-btn>
@@ -44,19 +44,16 @@
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.name"
-                      label="Name"
+                      v-model="editedItem.nombre"
+                      label="Nombre"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      v-model="editedItem.sigla"
-                      label="Sigla"
-                    ></v-text-field>
+                    <v-text-field v-model="editedItem.sigla" label="Sigla"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.dirección"
+                      v-model="editedItem.direccion"
                       label="Dirección"
                     ></v-text-field>
                   </v-col>
@@ -64,9 +61,9 @@
                 <v-combobox
                   label="Nivel de Acceso"
                   :items="[
-                    'Nivel 1-Administrador',
-                    'Nivel 2-Acceder a toda la información',
-                    'Nivel 3-Datos de su entidad',
+                    'Nivel 1 - Administrador',
+                    'Nivel 2 - Acceder a toda la información',
+                    'Nivel 3 - Datos de su entidad',
                   ]"
                 >
                 </v-combobox>
@@ -78,9 +75,7 @@
               <v-btn color="blue-darken-1" variant="text" @click="close">
                 Cancelar
               </v-btn>
-              <v-btn color="blue-darken-1" variant="text" @click="save">
-                Guardar
-              </v-btn>
+              <v-btn color="blue-darken-1" variant="text" @click="save"> Guardar </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -91,13 +86,8 @@
             >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="text" @click="closeDelete"
-                >No</v-btn
-              >
-              <v-btn
-                color="blue-darken-1"
-                variant="text"
-                @click="deleteItemConfirm"
+              <v-btn color="blue-darken-1" variant="text" @click="closeDelete">No</v-btn>
+              <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm"
                 >Si</v-btn
               >
               <v-spacer></v-spacer>
@@ -109,12 +99,7 @@
     <template v-slot:item.actions="{ item }">
       <v-dialog max-width="500px">
         <template v-slot:activator="{ props }">
-          <v-icon
-            size="small"
-            class="me-2"
-            v-bind="props"
-            @click="mostrarItem(item.raw)"
-          >
+          <v-icon size="small" class="me-2" v-bind="props" @click="permisosItem(item.raw)">
             mdi-key
           </v-icon>
         </template>
@@ -125,7 +110,7 @@
             <v-card-text class="mt-0">
               <v-col>
                 <v-text-field
-                  v-model="entidadItem.name"
+                  v-model="entidadItem.nombre"
                   label="Entidad"
                   readonly
                 ></v-text-field>
@@ -153,7 +138,7 @@
                 </v-combobox>
               </v-col>
               <v-card-actions class="justify-center">
-                <v-btn color="primary" :disabled="!form" variant="elevated">
+                <v-btn color="primary" variant="elevated">
                   Guardar
                 </v-btn>
               </v-card-actions>
@@ -162,9 +147,7 @@
         </v-card>
       </v-dialog>
 
-      <v-icon size="small" class="me-2" @click="editItem(item.raw)">
-        mdi-pencil
-      </v-icon>
+      <v-icon size="small" class="me-2" @click="editItem(item.raw)"> mdi-pencil </v-icon>
       <v-icon size="small" @click="deleteItem(item.raw)"> mdi-delete </v-icon>
     </template>
 
@@ -175,7 +158,6 @@
 </template>
 
 <script>
-import CambiarPassword from "./CambiarPassword.vue";
 export default {
   data: () => ({
     dialog: false,
@@ -185,9 +167,9 @@ export default {
     headers: [
       {
         align: "start",
-        key: "name",
+        key: "nombre",
         sortable: false,
-        title: "Name",
+        title: "Nombre",
       },
       {
         align: "start",
@@ -195,23 +177,23 @@ export default {
         sortable: false,
         title: "Sigla",
       },
-      { title: "Dirección", key: "dirección" },
+      { title: "Dirección", key: "direccion" },
       { title: "Acciones", key: "actions", sortable: false },
     ],
-    desserts: [],
+    entidades: [],
     editedIndex: -1,
     editedItem: {
-      name: "",
+      nombre: "",
       sigla: "",
-      dirección: "",
+      direccion: "",
     },
     defaultItem: {
-      name: "",
+      nombre: "",
       sigla: "",
-      dirección: "",
+      direccion: "",
     },
     entidadItem: {
-      name: "",
+      nombre: "",
     },
   }),
 
@@ -236,44 +218,44 @@ export default {
 
   methods: {
     initialize() {
-      this.desserts = [
+      this.entidades = [
         {
-          name: "Entidad 1",
+          nombre: "Entidad 1",
           sigla: "E1",
-          dirección: "Av.11",
+          direccion: "Av.11",
         },
         {
-          name: "Entidad 2",
+          nombre: "Entidad 2",
           sigla: "E2",
-          dirección: "Av.22",
+          direccion: "Av.22",
         },
         {
-          name: "Entidad 3",
+          nombre: "Entidad 3",
           sigla: "E3",
-          dirección: "Av.33",
+          direccion: "Av.33",
         },
       ];
     },
-    mostrarItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+    permisosItem(item) {
+      this.editedIndex = this.entidades.indexOf(item);
       this.entidadItem = Object.assign({}, item);
       this.dialog = false;
     },
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.entidades.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.entidades.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
+      this.entidades.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
@@ -295,9 +277,9 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.entidades[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.entidades.push(this.editedItem);
       }
       this.close();
     },
