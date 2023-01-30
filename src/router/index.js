@@ -1,41 +1,41 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "about" */ '../layouts/Dashboard.vue')
+    path: "/",
+    name: "home",
+    component: () => import("../layouts/Dashboard.vue"),
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+    path: "/login",
+    name: "login",
+    component: () => import("../components/LoginView.vue"),
   },
   {
-    path: '/recover',
-    name: 'recover',
-    component: () => import(/* webpackChunkName: "about" */ '../views/RecoverView.vue')
+    path: "/recover",
+    name: "recover",
+    component: () => import("../components/RecoverView.vue"),
   },
   {
-    path: '/retrieve',
-    name: 'retrieve',
-    component: () => import(/* webpackChunkName: "about" */ '../views/RetrieveView.vue')
+    path: "/retrieve",
+    name: "retrieve",
+    component: () => import("../components/RetrieveView.vue"),
   },
   {
-    path: '/users',
-    name: 'users',
-    component: () => import(/* webpackChunkName: "about" */ '../components/UserList.vue')
+    path: "/usuarios",
+    name: "usuarios",
+    component: () => import("../components/Usuario.vue"),
   },
   {
-    path: '/entidad',
-    name: 'entidad',
-    component: () => import(/* webpackChunkName: "about" */ '../components/EntidadList.vue')
-  }
-]
+    path: "/entidades",
+    name: "entidades",
+    component: () => import("../components/Entidad.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
