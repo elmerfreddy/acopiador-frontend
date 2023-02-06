@@ -1,39 +1,38 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
+import Dashboard from "../layouts/Dashboard.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "about" */ '../layouts/Dashboard.vue')
+    path: "/",
+    name: "dashboard",
+    component: Dashboard,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: "/login",
+    name: "login",
+    component: () => import("../components/LoginView.vue"),
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+    path: "/recover",
+    name: "recover",
+    component: () => import("../components/RecoverView.vue"),
   },
   {
-    path: '/recover',
-    name: 'recover',
-    component: () => import(/* webpackChunkName: "about" */ '../views/RecoverView.vue')
+    path: "/retrieve",
+    name: "retrieve",
+    component: () => import("../components/RetrieveView.vue"),
   },
   {
-    path: '/retrieve',
-    name: 'retrieve',
-    component: () => import(/* webpackChunkName: "about" */ '../views/RetrieveView.vue')
+    path: "/usuarios",
+    name: "usuarios",
+    component: () => import("../components/Usuario.vue"),
   },
   {
-    path: '/hom',
-    name: 'hom',
-    component: () => import(/* webpackChunkName: "about" */ '../views/HomView.vue')
+    path: "/entidades",
+    name: "entidades",
+    component: () => import("../components/Entidad.vue"),
   },
+<<<<<<< HEAD
   {
     path: '/lista',
     name: 'lista',
@@ -70,10 +69,13 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../components/DatosList.vue')
   },
 ]
+=======
+];
+>>>>>>> eca962a30838991748df6fd350c7245b8748ad14
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
