@@ -41,18 +41,14 @@ export default {
     group: null,
     items: [
       { title: "Home", icon: "mdi-view-dashboard", path: "/" },
-<<<<<<< HEAD
-      { title: "Usuarios", icon: "mdi-account-box", path: "/users" },
-      { title: "Entidades", icon: "mdi-office-building-outline", path: "/entidad" },
-      { title: "Datos", icon: "mdi-database-cog", path: "/datos" },
-=======
+
       { title: "Usuarios", icon: "mdi-account-box", path: "/usuarios" },
       {
         title: "Entidades",
         icon: "mdi-office-building-outline",
         path: "/entidades",
-      },
->>>>>>> eca962a30838991748df6fd350c7245b8748ad14
+      },  { title: "Datos", icon: "mdi-database-cog", path: "/datos" },
+
     ],
   }),
 
