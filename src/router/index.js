@@ -50,6 +50,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/PerfilView.vue')
   },
   {
+    path: '/dato',
+    name: 'dato',
+    component: () => import(/* webpackChunkName: "about" */ '../components/DatoTabs.vue')
+  },
+  {
     path: '/users',
     name: 'users',
     component: () => import(/* webpackChunkName: "about" */ '../components/UserList.vue')
@@ -58,7 +63,12 @@ const routes = [
     path: '/entidad',
     name: 'entidad',
     component: () => import(/* webpackChunkName: "about" */ '../components/EntidadList.vue')
-  }
+  },
+  {
+    path: '/datos',
+    name: 'Datos',
+    component: () => import(/* webpackChunkName: "about" */ '../components/DatosList.vue')
+  },
 ]
 
 const router = createRouter({

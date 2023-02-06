@@ -43,6 +43,7 @@ export default {
       { title: "Home", icon: "mdi-view-dashboard", path: "/" },
       { title: "Usuarios", icon: "mdi-account-box", path: "/users" },
       { title: "Entidades", icon: "mdi-office-building-outline", path: "/entidad" },
+      { title: "Datos", icon: "mdi-database-cog", path: "/datos" },
     ],
   }),
 
