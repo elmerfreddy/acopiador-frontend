@@ -56,7 +56,7 @@
 </template>
 <script>
 export default {
-  name: "App",
+  name: "LoginView",
 
   data: () => ({
     passwordShow: false,
@@ -68,7 +68,8 @@ export default {
   methods: {
     Submit() {
       this.$store.commit("login", this.form.usuario);
-      this.$router.push({ name: "dashboard" });
+      this.$router.replace({ name: "dashboard" });
+      return false;
     },
   },
 };

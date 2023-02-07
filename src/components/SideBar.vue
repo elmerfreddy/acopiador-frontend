@@ -40,15 +40,14 @@ export default {
     drawer: true,
     group: null,
     items: [
-      { title: "Home", icon: "mdi-view-dashboard", path: "/" },
-
+      { title: "Home", icon: "mdi-view-dashboard", path: "/dashboard" },
       { title: "Usuarios", icon: "mdi-account-box", path: "/usuarios" },
       {
         title: "Entidades",
         icon: "mdi-office-building-outline",
         path: "/entidades",
-      },  { title: "Datos", icon: "mdi-database-cog", path: "/datos" },
-
+      },
+      { title: "Datos", icon: "mdi-database-cog", path: "/datos" },
     ],
   }),
 

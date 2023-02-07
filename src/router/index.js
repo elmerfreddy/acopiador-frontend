@@ -1,11 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from "../layouts/Dashboard.vue";
 
 const routes = [
   {
     path: "/",
-    name: "dashboard",
-    component: Dashboard,
+    redirect: "/login",
   },
   {
     path: "/login",
@@ -21,6 +19,11 @@ const routes = [
     path: "/retrieve",
     name: "retrieve",
     component: () => import("../components/RetrieveView.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: () => import("../layouts/Dashboard.vue"),
   },
   {
     path: "/usuarios",

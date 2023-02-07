@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <SideBar />
+    <SideBar v-if="$store.state.usuario" />
     <v-main>
       <router-view />
     </v-main>
-    <FooterBar />
+    <FooterBar v-if="$store.state.usuario" />
   </v-app>
 </template>
 
