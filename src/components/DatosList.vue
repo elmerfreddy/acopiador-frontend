@@ -6,8 +6,7 @@
             </v-toolbar>
             <v-toolbar flat>
                 <v-dialog v-model="dialog" max-width="500px">
-                    <template v-slot:activator="{ props }">
-
+                    <template v-slot:activator="{props}">
                         <v-dialog width="700">
                             <template v-slot:activator="{ props }">
                                 <v-card-actions class="px-4 pb-3">
@@ -17,23 +16,18 @@
                                     </v-btn>
                                 </v-card-actions>
                             </template>
-
-                            <DatoTabs />
-
+                            <DatoTabs/>
                         </v-dialog>
                         <v-spacer></v-spacer>
                         <v-spacer></v-spacer>
                         <v-text-field color="primary" v-model="search" class="px-16" append-icon="mdi-magnify"
                             label="Buscar">
                         </v-text-field>
-
                     </template>
-
                     <v-card>
                         <v-card-title>
                             <span class="text-h5">{{ formTitle }}</span>
                         </v-card-title>
-
                         <v-card-text>
                             <v-container>
                                 <v-row>
@@ -57,7 +51,6 @@
                             </v-btn>
                         </v-card-actions>
                     </v-card>
-
                 </v-dialog>
                 <v-dialog v-model="dialogDelete" max-width="500px">
                     <v-card>
@@ -75,7 +68,6 @@
         <template v-slot:item.actions="{ item }">
             <v-icon size="small" class="me-2" @click="editItem(item.raw)">
                 mdi-pencil
-
             </v-icon>
             <v-icon size="small" @click="deleteItem(item.raw)">
                 mdi-delete
@@ -86,7 +78,6 @@
             <v-btn color="primary" @click="initialize">
                 Reestablecer
             </v-btn>
-
         </template>
     </v-data-table>
 </template>

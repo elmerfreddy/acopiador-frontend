@@ -1,23 +1,22 @@
 
-<template>
-  <v-card width="1000">
+<template >
+  <v-dialog v-model="dialog" max-width="1000px">
+  <v-card width="1000" >
     <v-container>
-      <v-tabs v-model="tabs" bg-color="primary">
-
-        <v-tab value="one">1. Datos generales</v-tab>
-        <v-tab value="two">2. Configurar datos</v-tab>
-        <v-tab value="three">3. Petición</v-tab>
-        <v-tab value="four">4. Respuesta</v-tab>
-        <v-tab value="five">5. Test</v-tab>
-
+      <v-tabs v-model="step" bg-color="primary"  >
+        <v-tab :value="1" >1. Datos generales</v-tab>
+        <v-tab :value="2" >2. Configurar datos</v-tab>
+        <v-tab :value="3">3. Petición</v-tab>
+        <v-tab :value="4">4. Respuesta</v-tab>
+        <v-tab :value="5">5. Test</v-tab>
       </v-tabs>
     </v-container>
-    <v-card-text>
-      <v-window v-model="tabs">
-        <v-window-item value="one">
-          <v-sheet width="600" class="mx-auto">
+    <v-card-text >
+      <v-window v-model="step" >
+        <v-window-item  :value="1">
+          <v-sheet width="600" class="mx-auto" >
             <v-form v-model="valid">
-              <v-container>
+              <v-container >
                 <v-row>
                   <v-col cols="3">
                     <v-list>
@@ -28,7 +27,6 @@
                     <v-combobox label="Seleccionar" :items="['Entidad 1', 'Entidad 2', 'Entidad 3']"></v-combobox>
                   </v-col>
                 </v-row>
-
                 <v-row>
                   <v-col lg="3" xl="">
                     <v-list>
@@ -53,18 +51,11 @@
                 </v-row>
               </v-container>
             </v-form>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="primary" variant="text" @click="close">
-                Continuar
-              </v-btn>
-            </v-card-actions>
           </v-sheet>
         </v-window-item>
 
-        <v-window-item value="two">
-          <v-table fixed-header center height="300px">
+        <v-window-item :value="2" >
+          <v-table fixed-header center height="300px" class="2" >
             <thead>
               <tr>
                 <v-spacer></v-spacer>
@@ -83,7 +74,6 @@
               </tr>
             </thead>
             <tbody>
-
               <tr v-for="item in desserts" :key="item.name">
                 <v-spacer></v-spacer>
                 <td>{{ item.name }}</td>
@@ -93,15 +83,9 @@
               </tr>
             </tbody>
           </v-table>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" variant="text" @click="close">
-             Continuar
-            </v-btn>
-          </v-card-actions>
         </v-window-item>
 
-        <v-window-item value="three">
+        <v-window-item :value="3" > 
           <v-table fixed-header center height="300px">
             <thead>
               <tr>
@@ -118,7 +102,6 @@
               </tr>
             </thead>
             <tbody>
-
               <tr v-for="item in desserts" :key="item.name">
                 <v-spacer></v-spacer>
                 <td>{{ item.name2 }}</td>
@@ -127,15 +110,9 @@
               </tr>
             </tbody>
           </v-table>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" variant="text" @click="close">
-              Continuar
-            </v-btn>
-          </v-card-actions>
         </v-window-item>
 
-        <v-window-item value="four">
+        <v-window-item :value="4">
           <v-table fixed-header center height="300px">
             <thead>
               <tr>
@@ -149,7 +126,6 @@
               </tr>
             </thead>
             <tbody>
-
               <tr v-for="item in desserts" :key="item.name">
                 <v-spacer></v-spacer>
                 <td>{{ item.respuesta }}</td>
@@ -157,15 +133,9 @@
               </tr>
             </tbody>
           </v-table>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" variant="text" @click="close">
-              Continuar
-            </v-btn>
-          </v-card-actions>
         </v-window-item>
 
-        <v-window-item value="five">
+        <v-window-item :value="5">
           <v-sheet>
             <v-form v-model="valid">
               <v-container>
@@ -233,29 +203,43 @@
                       :items="['La paz', 'Cochabamba', 'Oruro', 'Potosi', 'Beni', 'Oruro', 'Pando', 'Chuquisaca', 'Santa Cruz',]"></v-combobox>
                   </v-col>
                 </v-row>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" variant="text" @click="close">
-                    Finalizar
-                  </v-btn>
-                </v-card-actions>
               </v-container>
             </v-form>
           </v-sheet>
+          <v-card-actions >
+          <v-spacer></v-spacer>
+            <v-btn
+              color="primary"
+              depressed
+              @click="dialog=false"
+            >
+              Finalizar
+            </v-btn> 
+          </v-card-actions>
         </v-window-item>
       </v-window>
+      <v-card-actions >
+      <v-spacer></v-spacer>
+        <v-btn
+         :disabled="step ==5 "
+         color="primary"
+         depressed
+         @click="step++"
+        >
+          {{ formTitle}}
+        </v-btn> 
+      </v-card-actions>
     </v-card-text>
   </v-card>
-
+  </v-dialog>
 </template>
 <script>
 export default {
-
   data: () => ({
-    dialog: false,
+    dialog: true,
     tabs: null,
+    step: 1,
     dialogDelete: false,
-
 
     headers: [
       {
@@ -313,10 +297,11 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? 'Nuevo Entidad' : 'Editar Entidad'
+      return this.step <= 4 ? 'Continuar' : ''
     },
   },
-
+  
+ 
   watch: {
     dialog(val) {
       val || this.close()
@@ -418,6 +403,13 @@ export default {
         this.editedIndex = -1
       })
     },
+    close1() {
+      this.step = 6
+      this.$nextTick(() => {
+        this.step = Object.assign({}, this.step)
+        this.step = 6
+      })
+    },
 
     closeDelete() {
       this.dialogDelete = false
@@ -435,6 +427,7 @@ export default {
       }
       this.close()
     },
+   
   },
 
 }
