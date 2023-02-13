@@ -33,7 +33,7 @@
                 :disabled="!form"
                 variant="elevated"
                 block
-                type="submit"
+                type="button"
                 @click="Submit"
               >
                 Ingresar
@@ -55,6 +55,7 @@
   </v-app>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "LoginView",
 
@@ -66,10 +67,18 @@ export default {
     },
   }),
   methods: {
-    Submit() {
-      this.$store.commit("login", this.form.usuario);
-      this.$router.replace({ name: "dashboard" });
-      return false;
+    async Submit(e) {
+      try {
+        const response = await axios.post("/api/auth/login", {
+          email: this.form.usuario,
+          password: this.form.password,
+        });
+        this.$store.commit("login", response.data.user.nombre);
+        this.$router.replace({ name: "dashboard" });
+      } catch (error) {
+        console.error(error);
+      }
+      e.preventDefault();
     },
   },
 };
