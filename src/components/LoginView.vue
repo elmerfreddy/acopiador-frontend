@@ -73,7 +73,8 @@ export default {
           email: this.form.usuario,
           password: this.form.password,
         });
-        this.$store.commit("login", response.data.user.nombre);
+        this.$store.commit("login", response.data.user.nombre + ' ' + response.data.user.apellido );
+        this.$store.commit("setToken", response.data.token );
         this.$router.replace({ name: "dashboard" });
       } catch (error) {
         console.error(error);
