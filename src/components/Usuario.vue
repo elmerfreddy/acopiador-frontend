@@ -44,20 +44,20 @@
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.nombres"
+                      v-model="editedItem.nombre"
                       label="Nombre(s)"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.apellidos"
+                      v-model="editedItem.apellido"
                       label="Apellido(s)"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.correo"
-                      label="Correo"
+                      v-model="editedItem.email"
+                      label="email"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -134,14 +134,14 @@
             <v-card-text class="mt-0">
               <v-col>
                 <v-text-field
-                  v-model="muestraItem.nombres"
+                  v-model="muestraItem.nombre"
                   label="Nombre(s)"
                   readonly
                 ></v-text-field>
               </v-col>
               <v-col>
                 <v-text-field
-                  v-model="muestraItem.apellidos"
+                  v-model="muestraItem.apellido"
                   label="Apellido(s)"
                   readonly
                 ></v-text-field>
@@ -173,6 +173,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import CambiarPassword from "./CambiarPassword.vue";
 
 export default {
@@ -183,41 +184,41 @@ export default {
     headers: [
       {
         align: "start",
-        key: "nombres",
+        key: "nombre",
         sortable: false,
         title: "Nombre(s)",
       },
       {
         align: "start",
-        key: "apellidos",
+        key: "apellido",
         sortable: false,
         title: "Apellido(s)",
       },
-      { title: "Correo", key: "correo" },
+      { title: "Email", key: "email" },
       { title: "Entidad", key: "entidad" },
       { title: "Acciones", key: "actions", sortable: false },
     ],
     usuarios: [],
     editedIndex: -1,
     editedItem: {
-      nombres: "",
-      apellidos: "",
-      correo: "",
+      nombre: "",
+      apellido: "",
+      email: "",
       celular: "",
       entidad: "",
       cargo: "",
     },
     defaultItem: {
-      nombres: "",
-      apellidos: "",
-      correo: "",
+      nombre: "",
+      apellido: "",
+      email: "",
       celular: "",
       entidad: "",
       cargo: "",
     },
     muestraItem: {
-      nombres: "",
-      apellidos: "",
+      nombre: "",
+      apellido: "",
       cargo: "",
     },
   }),
@@ -242,26 +243,15 @@ export default {
   },
 
   methods: {
-    initialize() {
-      this.usuarios = [
-        {
-          nombres: "Juan Alberto",
-          apellidos: "Perez Rojas",
-          correo: "juanalberto.perez@gmail.com",
-          celular: "70231412",
-          entidad: "Entidad 1",
-          cargo: "Técnico de Digitalización y Estadística",
-        },
-        {
-          nombres: "Pepito",
-          apellidos: "Palotes",
-          correo: "pepito.palotes@gmail.com",
-          celular: "71912345",
-          entidad: "Entidad 2",
-          cargo: "Profesional Estadístico",
-        },
-      ];
+    async initialize() {
+      try {
+        const respuesta = await axios.get("/api/usuarios");
+        this.usuarios = respuesta.data;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
+
     mostrarItem(item) {
       this.editedIndex = this.usuarios.indexOf(item);
       this.muestraItem = Object.assign({}, item);
