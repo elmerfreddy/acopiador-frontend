@@ -49,12 +49,15 @@
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.sigla" label="Sigla"></v-text-field>
+                    <v-text-field
+                      v-model="editedItem.sigla"
+                      label="Sigla"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.direccion"
-                      label="Dirección"
+                      v-model="editedItem.estado"
+                      label="Estado"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -75,7 +78,9 @@
               <v-btn color="blue-darken-1" variant="text" @click="close">
                 Cancelar
               </v-btn>
-              <v-btn color="blue-darken-1" variant="text" @click="save"> Guardar </v-btn>
+              <v-btn color="blue-darken-1" variant="text" @click="save">
+                Guardar
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -86,8 +91,13 @@
             >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="text" @click="closeDelete">No</v-btn>
-              <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm"
+              <v-btn color="blue-darken-1" variant="text" @click="closeDelete"
+                >No</v-btn
+              >
+              <v-btn
+                color="blue-darken-1"
+                variant="text"
+                @click="deleteItemConfirm"
                 >Si</v-btn
               >
               <v-spacer></v-spacer>
@@ -99,7 +109,12 @@
     <template v-slot:item.actions="{ item }">
       <v-dialog max-width="500px">
         <template v-slot:activator="{ props }">
-          <v-icon size="small" class="me-2" v-bind="props" @click="permisosItem(item.raw)">
+          <v-icon
+            size="small"
+            class="me-2"
+            v-bind="props"
+            @click="permisosItem(item.raw)"
+          >
             mdi-key
           </v-icon>
         </template>
@@ -138,16 +153,16 @@
                 </v-combobox>
               </v-col>
               <v-card-actions class="justify-center">
-                <v-btn color="primary" variant="elevated">
-                  Guardar
-                </v-btn>
+                <v-btn color="primary" variant="elevated"> Guardar </v-btn>
               </v-card-actions>
             </v-card-text>
           </v-col>
         </v-card>
       </v-dialog>
 
-      <v-icon size="small" class="me-2" @click="editItem(item.raw)"> mdi-pencil </v-icon>
+      <v-icon size="small" class="me-2" @click="editItem(item.raw)">
+        mdi-pencil
+      </v-icon>
       <v-icon size="small" @click="deleteItem(item.raw)"> mdi-delete </v-icon>
     </template>
 
@@ -158,6 +173,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     dialog: false,
@@ -177,23 +194,28 @@ export default {
         sortable: false,
         title: "Sigla",
       },
-      { title: "Dirección", key: "direccion" },
+      { title: "Estado", key: "estado" },
       { title: "Acciones", key: "actions", sortable: false },
     ],
     entidades: [],
     editedIndex: -1,
     editedItem: {
+      id: "",
       nombre: "",
       sigla: "",
-      direccion: "",
+      estado: "",
     },
     defaultItem: {
+      id: "",
       nombre: "",
       sigla: "",
-      direccion: "",
+      estado: "",
     },
     entidadItem: {
+      id: "",
       nombre: "",
+      sigla: "",
+      estado: "",
     },
   }),
 
@@ -217,24 +239,13 @@ export default {
   },
 
   methods: {
-    initialize() {
-      this.entidades = [
-        {
-          nombre: "Entidad 1",
-          sigla: "E1",
-          direccion: "Av.11",
-        },
-        {
-          nombre: "Entidad 2",
-          sigla: "E2",
-          direccion: "Av.22",
-        },
-        {
-          nombre: "Entidad 3",
-          sigla: "E3",
-          direccion: "Av.33",
-        },
-      ];
+    async initialize() {
+      try {
+        const respuesta = await axios.get("/api/entidades");
+        this.entidades = respuesta.data;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
     permisosItem(item) {
       this.editedIndex = this.entidades.indexOf(item);
