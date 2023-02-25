@@ -239,13 +239,35 @@ export default {
   },
 
   methods: {
-    async initialize() {
+    /*async initialize() {
       try {
         const respuesta = await axios.get("/api/entidades");
         this.entidades = respuesta.data;
       } catch (error) {
         throw new Error(error);
       }
+    },*/
+    initialize() {
+      this.entidades = [
+        {
+          id: 1,
+          nombre: "Entidad 1",
+          sigla: "E1",
+          estado: "ACTIVO",
+        },
+        {
+          id: 2,
+          nombre: "Entidad 2",
+          sigla: "E2",
+          estado: "ACTIVO",
+        },
+        {
+          id: 3,
+          nombre: "Entidad 3",
+          sigla: "E3",
+          estado: "ACTIVO",
+        },
+      ];
     },
     permisosItem(item) {
       this.editedIndex = this.entidades.indexOf(item);

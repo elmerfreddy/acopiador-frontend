@@ -68,7 +68,7 @@ export default {
   }),
   methods: {
     async Submit(e) {
-      try {
+      /*try {
         const response = await axios.post("/api/auth/login", {
           email: this.form.usuario,
           password: this.form.password,
@@ -78,7 +78,10 @@ export default {
         this.$router.replace({ name: "dashboard" });
       } catch (error) {
         console.error(error);
-      }
+      }*/
+      this.$store.commit("login", "Juan Perez");
+      this.$store.commit("setToken", "abcdefghijk.12345678890.abcdefghijk");
+      this.$router.replace({ name: "dashboard" });
       e.preventDefault();
     },
   },

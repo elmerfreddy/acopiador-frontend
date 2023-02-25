@@ -243,13 +243,41 @@ export default {
   },
 
   methods: {
-    async initialize() {
+    /*async initialize() {
       try {
         const respuesta = await axios.get("/api/usuarios");
         this.usuarios = respuesta.data;
       } catch (error) {
         throw new Error(error);
       }
+    },*/
+    initialize() {
+      this.usuarios = [
+        {
+          id: 4,
+          id_entidad: 1,
+          nombre: "Roberto",
+          apellido: "Zediño",
+          cargo: "tecnico 77",
+          celular: "7774455",
+          email: "qq@77.q",
+          entidad: "Entidad 1",
+          estado: "ACTIVO",
+          rol: "USER1",
+        },
+        {
+          id: 5,
+          id_entidad: 1,
+          nombre: "Osvaldo",
+          apellido: "Covaruvias",
+          cargo: "tecnico 88",
+          celular: "717171717",
+          email: "qq@88.q",
+          entidad: "Entidad 2",
+          estado: "ACTIVO",
+          rol: "USER1",
+        },
+      ];
     },
 
     mostrarItem(item) {
