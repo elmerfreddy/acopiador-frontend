@@ -35,21 +35,17 @@ const routes = [
     name: "entidades",
     component: () => import("../components/Entidad.vue"),
   },
-
   {
     path: '/dato',
     name: 'dato',
-
-    component: () => import(/* webpackChunkName: "about" */ '../components/DatoTabs.vue')
-  },
-  
+    component: () => import(/* webpackChunkName: "dato" */ '../components/DatoTabs.vue')
+  }, 
   {
     path: '/datos',
-    name: 'Datos',
-    component: () => import(/* webpackChunkName: "about" */ '../components/DatosList.vue')
+    name: 'datos',
+    component: () => import(/* webpackChunkName: "datos" */ '../components/DatosList.vue')
   }
 ]
-
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

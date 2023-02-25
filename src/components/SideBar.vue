@@ -35,10 +35,11 @@
         </template>
 
         <v-list-item
-          v-for="([title, icon], i) in datos"
+          v-for="([title, icon, pathName], i) in datos"
           :key="i"
           :value="title"
           :title="title"
+          :to="pathName"
         ></v-list-item>
       </v-list-group>
 
@@ -48,15 +49,16 @@
         </template>
 
         <v-list-item
-          v-for="([title, icon], i) in reportes"
+          v-for="([title, icon, pathName], i) in reportes"
           :key="i"
           :value="title"
           :title="title"
+          :to="pathName"
         ></v-list-item>
       </v-list-group>
 
-      <v-list-item v-bind="props" title="Ayuda"></v-list-item>
-      <v-list-item v-bind="props" title="Logs"></v-list-item>
+      <v-list-item title="Ayuda"></v-list-item>
+      <v-list-item title="Logs"></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -64,13 +66,13 @@
 <script>
 export default {
   data: () => ({
-    open: ["Datos"],
+    open: [],
     admins: [
       ["Usuarios", "mdi-account-multiple-outline", { name: "usuarios" }],
       ["Entidades", "mdi-cog-outline", { name: "entidades" }],
     ],
     datos: [
-      ["Datos de entrada", "mdi-plus-outline"],
+      ["Datos de entrada", "mdi-plus-outline", { name: "datos" }],
       ["Enviar datos entrada", "mdi-file-outline"],
       ["Formulario registro", "mdi-update"],
       ["Datos validados", "mdi-delete"],
