@@ -14,22 +14,49 @@
   </v-app-bar>
 
   <v-navigation-drawer v-model="drawer" location="left">
-    <v-list density="compact">
-      <v-list-subheader>ADMINISTRACIÓN</v-list-subheader>
-
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :value="item"
-        active-color="primary"
-        :to="item.path"
-      >
-        <template v-slot:prepend>
-          <v-icon :icon="item.icon"></v-icon>
+    <v-list v-model:opened="open">
+      <v-list-group value="Admin">
+        <template v-slot:activator="{ props }">
+          <v-list-item v-bind="props" title="Administración"></v-list-item>
         </template>
 
-        <v-list-item-title v-text="item.title"></v-list-item-title>
-      </v-list-item>
+        <v-list-item
+          v-for="([title, icon, pathName], i) in admins"
+          :key="i"
+          :title="title"
+          :value="title"
+          :to="pathName"
+        ></v-list-item>
+      </v-list-group>
+
+      <v-list-group value="Datos">
+        <template v-slot:activator="{ props }">
+          <v-list-item v-bind="props" title="Datos"></v-list-item>
+        </template>
+
+        <v-list-item
+          v-for="([title, icon], i) in datos"
+          :key="i"
+          :value="title"
+          :title="title"
+        ></v-list-item>
+      </v-list-group>
+
+      <v-list-group value="Reportes">
+        <template v-slot:activator="{ props }">
+          <v-list-item v-bind="props" title="Reportes"></v-list-item>
+        </template>
+
+        <v-list-item
+          v-for="([title, icon], i) in reportes"
+          :key="i"
+          :value="title"
+          :title="title"
+        ></v-list-item>
+      </v-list-group>
+
+      <v-list-item v-bind="props" title="Ayuda"></v-list-item>
+      <v-list-item v-bind="props" title="Logs"></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -37,6 +64,22 @@
 <script>
 export default {
   data: () => ({
+    open: ["Datos"],
+    admins: [
+      ["Usuarios", "mdi-account-multiple-outline", { name: "usuarios" }],
+      ["Entidades", "mdi-cog-outline", { name: "entidades" }],
+    ],
+    datos: [
+      ["Datos de entrada", "mdi-plus-outline"],
+      ["Enviar datos entrada", "mdi-file-outline"],
+      ["Formulario registro", "mdi-update"],
+      ["Datos validados", "mdi-delete"],
+      ["Enviar datos", "mdi-delete"],
+    ],
+    reportes: [
+      ["Reporte 1", "mdi-plus-outline"],
+      ["Reporte 2", "mdi-file-outline"],
+    ],
     drawer: true,
     group: null,
     items: [
