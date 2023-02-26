@@ -43,7 +43,7 @@ const routes = [
   {
     path: '/datos',
     name: 'datos',
-    component: () => import(/* webpackChunkName: "datos" */ '../components/DatosList.vue')
+    component: () => import(/* webpackChunkName: "datos" */ '../components/Datos.vue')
   }
 ]
 
