@@ -101,6 +101,111 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+
+        <v-dialog v-model="dialogConfig" max-width="750px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Configurar Datos de Entrada</span>
+            </v-card-title>
+
+            <v-card-text>
+              <v-form @submit.prevent="submitVariables">
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="3">
+                      <v-text-field
+                        label="Atributo"
+                        v-model="itemVariables.atributo"
+                      />
+                    </v-col>
+                    <v-col cols="12" sm="2">
+                      <v-text-field label="Tipo" v-model="itemVariables.tipo" />
+                    </v-col>
+                    <v-col cols="12" sm="2">
+                      <v-text-field
+                        label="Ejemplo"
+                        v-model="itemVariables.ejemplo"
+                      />
+                    </v-col>
+                    <v-col cols="12" sm="3">
+                      <v-text-field
+                        label="Métrica o atributo"
+                        v-model="itemVariables.metrica"
+                      />
+                    </v-col>
+                    <v-col cols="12" sm="2">
+                      <v-btn
+                        color="primary"
+                        right
+                        fab
+                        type="submit"
+                        icon="mdi-plus"
+                      ></v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-form>
+              <v-table fixed-header density="compact" height="300px">
+                <thead>
+                  <tr>
+                    <th class="text-left">Atributo</th>
+                    <th class="text-left">Tipo</th>
+                    <th class="text-left">Ejemplo</th>
+                    <th class="text-left">Métrica o atributo</th>
+                    <th class="text-left">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template
+                    v-if="muestraItem.variables && muestraItem.variables.length"
+                  >
+                    <tr
+                      v-for="item in muestraItem.variables"
+                      :key="item.atributo"
+                    >
+                      <td>{{ item.atributo }}</td>
+                      <td>{{ item.tipo }}</td>
+                      <td>{{ item.ejemplo }}</td>
+                      <td>{{ item.metrica }}</td>
+                      <td>
+                        <v-icon
+                          size="small"
+                          class="me-2"
+                          @click="editItemVariable(item)"
+                        >
+                          mdi-pencil
+                        </v-icon>
+                        <v-icon
+                          size="small"
+                          class="me-2"
+                          @click="deleteItemVariable(item)"
+                        >
+                          mdi-delete
+                        </v-icon>
+                      </td>
+                    </tr>
+                  </template>
+                  <tr v-else>
+                    <td colspan="5" align="center">
+                      <em>No hay registros para mostrar.</em>
+                    </td>
+                  </tr>
+                </tbody>
+              </v-table>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="blue-darken-1"
+                variant="text"
+                @click="dialogConfig = false"
+              >
+                Cerrar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
@@ -150,7 +255,10 @@
       <v-icon size="small" class="me-2" @click="editItem(item.raw)">
         mdi-pencil
       </v-icon>
-      <v-icon size="small" @click="deleteItem(item.raw)"> mdi-delete </v-icon>
+      <v-icon size="small" class="me-2" @click="deleteItem(item.raw)">
+        mdi-delete
+      </v-icon>
+      <v-icon size="small" @click="configurarItem(item.raw)"> mdi-cog </v-icon>
     </template>
 
     <template v-slot:no-data>
@@ -168,6 +276,7 @@ export default {
     search: "",
     dialogDelete: false,
     dialogShow: false,
+    dialogConfig: false,
     headers: [
       {
         align: "start",
@@ -190,16 +299,31 @@ export default {
       entidad: "",
       conjunto_de_datos: "",
       tipo: "",
+      variables: [],
     },
     defaultItem: {
       entidad: "",
       conjunto_de_datos: "",
       tipo: "",
+      variables: [],
     },
     muestraItem: {
       entidad: "",
       conjunto_de_datos: "",
       tipo: "",
+      variables: [],
+    },
+    itemVariables: {
+      atributo: "",
+      tipo: "",
+      ejemplo: "",
+      metrica: "",
+    },
+    defaultItemVariables: {
+      atributo: "",
+      tipo: "",
+      ejemplo: "",
+      metrica: "",
     },
   }),
 
@@ -239,24 +363,76 @@ export default {
           entidad: "Entidad 1",
           conjunto_de_datos: "Población de niños",
           tipo: "Web Service",
+          variables: [
+            {
+              atributo: "Secuestros",
+              tipo: "INT",
+              ejemplo: "468",
+              metrica: "Métrica",
+            },
+            {
+              atributo: "Sexo",
+              tipo: "STRING",
+              ejemplo: "M",
+              metrica: "Atributo",
+            },
+          ],
         },
         {
           entidad: "Entidad 1",
           conjunto_de_datos: "Población de adolescentes",
           tipo: "Archivo",
+          variables: [
+            {
+              atributo: "Municipio",
+              tipo: "STRING",
+              ejemplo: "Viacha",
+              metrica: "Atributo",
+            },
+          ],
         },
         {
           entidad: "Entidad 2",
           conjunto_de_datos: "Trata y tráfico",
           tipo: "Archivo",
+          variables: [],
         },
       ];
+    },
+
+    submitVariables() {
+      if (this.editedIndex > -1) {
+        Object.assign(
+          this.muestraItem.variables[this.editedIndex],
+          this.itemVariables
+        );
+      } else {
+        this.muestraItem.variables.push(this.itemVariables);
+      }
+      this.itemVariables = Object.assign({}, this.defaultItemVariables);
     },
 
     mostrarItem(item) {
       this.editedIndex = this.datos.indexOf(item);
       this.muestraItem = Object.assign({}, item);
       this.dialog = false;
+    },
+
+    configurarItem(item) {
+      this.editedIndex = this.datos.indexOf(item);
+      this.muestraItem = Object.assign({}, item);
+      this.dialogConfig = true;
+    },
+
+    editItemVariable(item) {
+      this.editedIndex = this.muestraItem.variables.indexOf(item);
+      this.itemVariables = Object.assign({}, item);
+    },
+
+    deleteItemVariable(item) {
+      this.editedIndex = this.muestraItem.variables.indexOf(item);
+      this.muestraItem.variables.splice(this.editedIndex, 1);
+      this.closeDelete();
     },
 
     editItem(item) {
