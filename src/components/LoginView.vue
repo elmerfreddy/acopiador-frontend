@@ -62,8 +62,8 @@ export default {
   data: () => ({
     passwordShow: false,
     form: {
-      usuario: "",
-      password: "",
+      usuario: "juan.perez@gmail.com",
+      password: "123456",
     },
   }),
   methods: {
