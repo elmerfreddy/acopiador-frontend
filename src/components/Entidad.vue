@@ -7,7 +7,7 @@
   >
     <template v-slot:top>
       <v-toolbar>
-        <v-toolbar-title>Entidades</v-toolbar-title>
+        <v-toolbar-title>Lista de Entidades</v-toolbar-title>
       </v-toolbar>
       <v-toolbar flat>
         <v-dialog v-model="dialog" max-width="500px">
@@ -32,7 +32,6 @@
               label="Buscar"
             >
             </v-text-field>
-            <v-spacer></v-spacer>
           </template>
           <v-card>
             <v-card-title>
