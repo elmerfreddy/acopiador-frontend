@@ -318,6 +318,7 @@ export default {
     ],
     datos: [],
     editedIndex: -1,
+    variableIndex: -1,
     editedItem: {
       entidad: "",
       conjunto_de_datos: "",
@@ -365,11 +366,11 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete();
     },
-    dialogLoading (val) {
-        if (!val) return
+    dialogLoading(val) {
+      if (!val) return;
 
-        setTimeout(() => (this.dialogLoading = false), 3000)
-      },
+      setTimeout(() => (this.dialogLoading = false), 3000);
+    },
   },
 
   created() {
@@ -429,11 +430,12 @@ export default {
     },
 
     submitVariables() {
-      if (this.editedIndex > -1) {
+      if (this.variableIndex > -1) {
         Object.assign(
-          this.muestraItem.variables[this.editedIndex],
+          this.muestraItem.variables[this.variableIndex],
           this.itemVariables
         );
+        this.variableIndex = -1;
       } else {
         this.muestraItem.variables.push(this.itemVariables);
       }
@@ -453,14 +455,14 @@ export default {
     },
 
     editItemVariable(item) {
-      this.editedIndex = this.muestraItem.variables.indexOf(item);
+      this.variableIndex = this.muestraItem.variables.indexOf(item);
       this.itemVariables = Object.assign({}, item);
     },
 
     deleteItemVariable(item) {
-      this.editedIndex = this.muestraItem.variables.indexOf(item);
-      this.muestraItem.variables.splice(this.editedIndex, 1);
-      this.closeDelete();
+      this.variableIndex = this.muestraItem.variables.indexOf(item);
+      this.muestraItem.variables.splice(this.variableIndex, 1);
+      this.variableIndex = -1;
     },
 
     editItem(item) {
