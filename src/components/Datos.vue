@@ -252,13 +252,35 @@
         </v-card>
       </v-dialog>
 
+      <v-dialog v-model="dialogLoading" :scrim="false" persistent width="auto">
+        <v-card color="primary">
+          <v-card-text>
+            Descargando archivo Excel...
+            <v-progress-linear
+              indeterminate
+              color="white"
+              class="mb-0"
+            ></v-progress-linear>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+
       <v-icon size="small" class="me-2" @click="editItem(item.raw)">
         mdi-pencil
       </v-icon>
       <v-icon size="small" class="me-2" @click="deleteItem(item.raw)">
         mdi-delete
       </v-icon>
-      <v-icon size="small" @click="configurarItem(item.raw)"> mdi-cog </v-icon>
+      <v-icon size="small" class="me-2" @click="configurarItem(item.raw)">
+        mdi-cog
+      </v-icon>
+      <v-icon
+        v-if="item.raw.variables.length"
+        size="small"
+        @click="dialogLoading = true"
+      >
+        mdi-download
+      </v-icon>
     </template>
 
     <template v-slot:no-data>
@@ -277,6 +299,7 @@ export default {
     dialogDelete: false,
     dialogShow: false,
     dialogConfig: false,
+    dialogLoading: false,
     headers: [
       {
         align: "start",
@@ -342,6 +365,11 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete();
     },
+    dialogLoading (val) {
+        if (!val) return
+
+        setTimeout(() => (this.dialogLoading = false), 3000)
+      },
   },
 
   created() {
