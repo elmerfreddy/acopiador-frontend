@@ -44,7 +44,12 @@ const routes = [
     path: '/datos',
     name: 'datos',
     component: () => import(/* webpackChunkName: "datos" */ '../components/Datos.vue')
-  }
+  },
+  {
+    path: '/enviar_datos',
+    name: 'enviar_datos',
+    component: () => import(/* webpackChunkName: "enviar_datos" */ '../components/DatosEnviar.vue')
+  },
 ]
 
 const router = createRouter({

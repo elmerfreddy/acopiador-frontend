@@ -76,7 +76,7 @@ export default {
       ["Enviar datos entrada", "mdi-file-outline"],
       ["Formulario registro", "mdi-update"],
       ["Datos validados", "mdi-delete"],
-      ["Enviar datos", "mdi-delete"],
+      ["Enviar datos", "mdi-delete", { name: "enviar_datos" }],
     ],
     reportes: [
       ["Reporte 1", "mdi-plus-outline"],
