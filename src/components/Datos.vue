@@ -275,7 +275,7 @@
         mdi-cog
       </v-icon>
       <v-icon
-        v-if="item.raw.variables.length"
+        v-if="item.raw.variables.length && item.raw.tipo == 'Archivo'"
         size="small"
         @click="dialogLoading = true"
       >
