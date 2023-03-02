@@ -206,6 +206,163 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+
+        <v-dialog v-model="dialogWebService" max-width="750px">
+          <v-card>
+            <v-card-title v-if="webServiceTab == 1">
+              <span class="text-h5">Configurar Web Service</span>
+            </v-card-title>
+
+            <v-card-text v-if="webServiceTab == 1">
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="8">
+                    <v-combobox
+                      label="Método"
+                      v-model="webServiceItem.metodo"
+                      :items="['GET', 'POST', 'PUT', 'PATCH', 'DELETE']"
+                    ></v-combobox>
+                    <v-text-field label="URL" v-model="webServiceItem.url" />
+                    <v-text-field
+                      label="Dirección"
+                      v-model="webServiceItem.direccion"
+                    />
+                    <v-text-field
+                      label="Token"
+                      v-model="webServiceItem.token"
+                    />
+                    <v-textarea
+                      label="Body"
+                      rows="4"
+                      v-model="webServiceItem.body"
+                    ></v-textarea>
+                  </v-col>
+                  <v-col cols="12" sm="4">
+                    <v-text-field
+                      label="Lapso (días)"
+                      v-model="webServiceItem.lapso"
+                    />
+                    <v-text-field label="Hora" v-model="webServiceItem.hora" />
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+
+            <v-card-title v-if="webServiceTab == 2">
+              <span class="text-h5">Códigos de respuesta</span>
+            </v-card-title>
+
+            <v-card-text v-if="webServiceTab == 2">
+              <v-form @submit.prevent="submitCodigosRespuesta">
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="4">
+                      <v-text-field label="Código" v-model="itemCodigoRespuesta.codigo" />
+                    </v-col>
+                    <v-col cols="12" sm="6">
+                      <v-text-field label="Descripción" v-model="itemCodigoRespuesta.descripcion"/>
+                    </v-col>
+                    <v-col cols="12" sm="2">
+                      <v-btn
+                        color="primary"
+                        right
+                        fab
+                        type="submit"
+                        icon="mdi-plus"
+                      ></v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-form>
+              <v-table fixed-header density="compact" height="300px">
+                <thead>
+                  <tr>
+                    <th class="text-left">Código</th>
+                    <th class="text-left">Descripción</th>
+                    <th class="text-left">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template
+                    v-if="
+                      webServiceItem.codigos && webServiceItem.codigos.length
+                    "
+                  >
+                    <tr
+                      v-for="item in webServiceItem.codigos"
+                      :key="item.codigo"
+                    >
+                      <td>{{ item.codigo }}</td>
+                      <td>{{ item.descripcion }}</td>
+                      <td>
+                        <v-icon
+                          size="small"
+                          class="me-2"
+                          @click="editItemCodigo(item)"
+                        >
+                          mdi-pencil
+                        </v-icon>
+                        <v-icon
+                          size="small"
+                          class="me-2"
+                          @click="deleteItemCodigo(item)"
+                        >
+                          mdi-delete
+                        </v-icon>
+                      </td>
+                    </tr>
+                  </template>
+                  <tr v-else>
+                    <td colspan="5" align="center">
+                      <em>No hay registros para mostrar.</em>
+                    </td>
+                  </tr>
+                </tbody>
+              </v-table>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="blue-darken-1"
+                variant="text"
+                @click="
+                  dialogWebService = false;
+                  webServiceTab = 0;
+                "
+              >
+                Cerrar
+              </v-btn>
+              <v-btn
+                color="blue-darken-1"
+                variant="text"
+                @click="webServiceTab = 2"
+                v-if="webServiceTab == 1"
+              >
+                Siguiente
+              </v-btn>
+              <v-btn
+                color="blue-darken-1"
+                variant="text"
+                @click="webServiceTab = 1"
+                v-if="webServiceTab == 2"
+              >
+                Anterior
+              </v-btn>
+              <v-btn
+                color="blue-darken-1"
+                variant="text"
+                @click="
+                  dialogWebService = false;
+                  webServiceTab = 0;
+                "
+                v-if="webServiceTab == 2"
+              >
+                Guardar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
@@ -299,6 +456,8 @@ export default {
     dialogDelete: false,
     dialogShow: false,
     dialogConfig: false,
+    dialogWebService: false,
+    webServiceTab: 0,
     dialogLoading: false,
     headers: [
       {
@@ -319,23 +478,27 @@ export default {
     datos: [],
     editedIndex: -1,
     variableIndex: -1,
+    codigoIndex: -1,
     editedItem: {
       entidad: "",
       conjunto_de_datos: "",
       tipo: "",
       variables: [],
+      webService: {},
     },
     defaultItem: {
       entidad: "",
       conjunto_de_datos: "",
       tipo: "",
       variables: [],
+      webService: {},
     },
     muestraItem: {
       entidad: "",
       conjunto_de_datos: "",
       tipo: "",
       variables: [],
+      webService: {},
     },
     itemVariables: {
       atributo: "",
@@ -348,6 +511,34 @@ export default {
       tipo: "",
       ejemplo: "",
       metrica: "",
+    },
+    webServiceItem: {
+      metodo: "",
+      url: "",
+      direccion: "",
+      token: "",
+      body: "",
+      lapso: "",
+      hora: "",
+      codigos: [],
+    },
+    defaultWebServiceItem: {
+      metodo: "",
+      url: "",
+      direccion: "",
+      token: "",
+      body: "",
+      lapso: "",
+      hora: "",
+      codigos: [],
+    },
+    itemCodigoRespuesta: {
+      codigo: "",
+      descripcion: "",
+    },
+    defaultItemCodigoRespuesta: {
+      codigo: "",
+      descripcion: "",
     },
   }),
 
@@ -406,6 +597,33 @@ export default {
               metrica: "Atributo",
             },
           ],
+          webService: {
+            metodo: "GET",
+            url: "https://api.ejemplo.com",
+            direccion: "/datos?inicio=2012&fin=2021",
+            token: "abcdefg.12345679890.abcdefg",
+            body: "{}",
+            lapso: "15",
+            hora: "01:00",
+            codigos: [
+              {
+                codigo: "200",
+                descripcion: "OK",
+              },
+              {
+                codigo: "500",
+                descripcion: "Intentar más tarde",
+              },
+              {
+                codigo: "404",
+                descripcion: "Notificar",
+              },
+              {
+                codigo: "401",
+                descripcion: "Verificar credenciales",
+              },
+            ],
+          },
         },
         {
           entidad: "Entidad 1",
@@ -419,12 +637,14 @@ export default {
               metrica: "Atributo",
             },
           ],
+          webService: {},
         },
         {
           entidad: "Entidad 2",
           conjunto_de_datos: "Trata y tráfico",
           tipo: "Archivo",
           variables: [],
+          webService: {},
         },
       ];
     },
@@ -442,6 +662,24 @@ export default {
       this.itemVariables = Object.assign({}, this.defaultItemVariables);
     },
 
+    submitCodigosRespuesta() {
+      if (this.codigoIndex > -1) {
+        Object.assign(
+          this.webServiceItem.codigos[this.codigoIndex],
+          this.itemCodigoRespuesta
+        );
+        this.codigoIndex = -1;
+      } else {
+        if (!this.webServiceItem.codigos) {
+          this.webServiceItem.codigos = [];
+        }
+        this.webServiceItem.codigos.push(this.itemCodigoRespuesta);
+      }
+      this.itemCodigoRespuesta = Object.assign({}, this.defaultItemCodigoRespuesta);
+    },
+
+    submitWebService() {},
+
     mostrarItem(item) {
       this.editedIndex = this.datos.indexOf(item);
       this.muestraItem = Object.assign({}, item);
@@ -451,7 +689,13 @@ export default {
     configurarItem(item) {
       this.editedIndex = this.datos.indexOf(item);
       this.muestraItem = Object.assign({}, item);
-      this.dialogConfig = true;
+      if (item.tipo === "Web Service") {
+        this.dialogWebService = true;
+        this.webServiceItem = this.muestraItem.webService;
+        this.webServiceTab = 1;
+      } else {
+        this.dialogConfig = true;
+      }
     },
 
     editItemVariable(item) {
@@ -463,6 +707,17 @@ export default {
       this.variableIndex = this.muestraItem.variables.indexOf(item);
       this.muestraItem.variables.splice(this.variableIndex, 1);
       this.variableIndex = -1;
+    },
+
+    editItemCodigo(item) {
+      this.codigoIndex = this.webServiceItem.codigos.indexOf(item);
+      this.itemCodigoRespuesta = Object.assign({}, item);
+    },
+
+    deleteItemCodigo(item) {
+      this.codigoIndex = this.webServiceItem.codigos.indexOf(item);
+      this.webServiceItem.codigos.splice(this.codigoIndex, 1);
+      this.codigoIndex = -1;
     },
 
     editItem(item) {
