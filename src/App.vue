@@ -12,6 +12,7 @@
 import SideBar from "./components/SideBar.vue";
 import FooterBar from "./components/FooterBar.vue";
 
+
 export default {
   mounted() {
     this.$store.commit("initializeStore");

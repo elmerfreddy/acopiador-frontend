@@ -56,49 +56,6 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-dialog v-model="dialogShow" max-width="750px">
-        <!-- <template v-slot:activator="{ props }">
-          <v-icon
-            size="small"
-            class="me-2"
-            v-bind="props"
-            @click="mostrarItem(item.raw)"
-          >
-            mdi-eye
-          </v-icon>
-        </template> -->
-        <v-card max-width="400">
-          <v-card-title>Configuración de Datos de Entrada</v-card-title>
-
-          <v-col align-self="center">
-            <v-card-text class="mt-0">
-              <v-col>
-                <v-text-field
-                  v-model="muestraItem.entidad"
-                  label="Entidad"
-                  readonly
-                ></v-text-field>
-              </v-col>
-              <v-col>
-                <v-text-field
-                  v-model="muestraItem.conjunto_de_datos"
-                  label="Conjunto de datos"
-                  readonly
-                ></v-text-field>
-              </v-col>
-              <v-col>
-                <v-text-field
-                  v-model="muestraItem.tipo"
-                  label="Tipo"
-                  readonly
-                ></v-text-field>
-              </v-col>
-              <v-divider></v-divider>
-            </v-card-text>
-          </v-col>
-        </v-card>
-      </v-dialog>
-
       <v-icon size="small" @click="configurarItem(item.raw)">
         mdi-upload
       </v-icon>
@@ -115,10 +72,10 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    dialog: false,
+    /* dialog: false, */
     search: "",
-    dialogDelete: false,
-    dialogShow: false,
+    /* dialogDelete: false,
+    dialogShow: false, */
     dialogConfig: false,
     headers: [
       {
@@ -137,7 +94,7 @@ export default {
       { title: "Acciones", key: "actions", sortable: false },
     ],
     datos: [],
-    editedIndex: -1,
+    /* editedIndex: -1,
     editedItem: {
       entidad: "",
       conjunto_de_datos: "",
@@ -167,25 +124,25 @@ export default {
       tipo: "",
       ejemplo: "",
       metrica: "",
-    },
+    }, */
   }),
 
-  computed: {
+  /* computed: {
     formTitle() {
       return this.editedIndex === -1
         ? "Crear Datos de Entrada"
         : "Editar Datos de Entrada";
     },
-  },
+  }, */
 
-  watch: {
+  /* watch: {
     dialog(val) {
       val || this.close();
     },
     dialogDelete(val) {
       val || this.closeDelete();
     },
-  },
+  }, */
 
   created() {
     this.initialize();
@@ -223,7 +180,7 @@ export default {
       ];
     },
 
-    submitVariables() {
+    /* submitVariables() {
       if (this.editedIndex > -1) {
         Object.assign(
           this.muestraItem.variables[this.editedIndex],
@@ -234,12 +191,12 @@ export default {
       }
       this.itemVariables = Object.assign({}, this.defaultItemVariables);
     },
-
+ */
     subirArchivo() {
       this.dialogConfig = false;
     },
 
-    mostrarItem(item) {
+    /* mostrarItem(item) {
       this.editedIndex = this.datos.indexOf(item);
       this.muestraItem = Object.assign({}, item);
       this.dialog = false;
@@ -302,7 +259,7 @@ export default {
         this.datos.push(this.editedItem);
       }
       this.close();
-    },
+    }, */
   },
 };
 </script>
