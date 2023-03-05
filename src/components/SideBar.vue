@@ -13,11 +13,22 @@
     </template>
   </v-app-bar>
 
-  <v-navigation-drawer v-model="drawer" location="left">
-    <v-list v-model:opened="open">
+  <v-navigation-drawer v-model="drawer" location="left" color="grey-lighten-4">
+    <v-list v-model:opened="open" nav>
+      <v-list-item
+        title="Principal"
+        :to="{ name: 'dashboard' }"
+        active-color="primary"
+        prepend-icon="mdi-home"
+      ></v-list-item>
       <v-list-group value="Admin">
         <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" title="Administración"></v-list-item>
+          <v-list-item
+            v-bind="props"
+            title="Administración"
+            active-color="primary"
+            prepend-icon="mdi-clipboard-list-outline"
+          ></v-list-item>
         </template>
 
         <v-list-item
@@ -26,12 +37,19 @@
           :title="title"
           :value="title"
           :to="pathName"
+          active-color="primary"
+          :prepend-icon="icon"
         ></v-list-item>
       </v-list-group>
 
       <v-list-group value="Datos">
         <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" title="Datos"></v-list-item>
+          <v-list-item
+            v-bind="props"
+            title="Datos"
+            active-color="primary"
+            prepend-icon="mdi-database-cog"
+          ></v-list-item>
         </template>
 
         <v-list-item
@@ -40,12 +58,19 @@
           :value="title"
           :title="title"
           :to="pathName"
+          active-color="primary"
+          :prepend-icon="icon"
         ></v-list-item>
       </v-list-group>
 
       <v-list-group value="Reportes">
         <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" title="Reportes"></v-list-item>
+          <v-list-item
+            v-bind="props"
+            title="Reportes"
+            active-color="primary"
+            prepend-icon="mdi-chart-box-outline"
+          ></v-list-item>
         </template>
 
         <v-list-item
@@ -54,11 +79,21 @@
           :value="title"
           :title="title"
           :to="pathName"
+          active-color="primary"
+          :prepend-icon="icon"
         ></v-list-item>
       </v-list-group>
 
-      <v-list-item title="Ayuda"></v-list-item>
-      <v-list-item title="Logs"></v-list-item>
+      <v-list-item
+        title="Ayuda"
+        active-color="primary"
+        prepend-icon="mdi-help-box"
+      ></v-list-item>
+      <v-list-item
+        title="Logs"
+        active-color="primary"
+        prepend-icon="mdi-format-list-bulleted"
+      ></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -69,38 +104,21 @@ export default {
     open: [],
     admins: [
       ["Usuarios", "mdi-account-multiple-outline", { name: "usuarios" }],
-      ["Entidades", "mdi-cog-outline", { name: "entidades" }],
+      ["Entidades", "mdi-office-building", { name: "entidades" }],
     ],
     datos: [
       ["Datos de entrada", "mdi-plus-outline", { name: "datos" }],
       ["Enviar datos entrada", "mdi-file-outline"],
       ["Formulario registro", "mdi-update"],
-      ["Datos validados", "mdi-delete"],
-      ["Enviar datos", "mdi-delete", { name: "enviar_datos" }],
+      ["Datos validados", "mdi-file-check"],
+      ["Enviar datos", "mdi-send", { name: "enviar_datos" }],
     ],
     reportes: [
-      ["Reporte 1", "mdi-plus-outline"],
-      ["Reporte 2", "mdi-file-outline"],
+      ["Reporte 1", "mdi-chart-bar"],
+      ["Reporte 2", "mdi-chart-pie"],
     ],
     drawer: true,
-    group: null,
-    items: [
-      { title: "Home", icon: "mdi-view-dashboard", path: "/dashboard" },
-      { title: "Usuarios", icon: "mdi-account-box", path: "/usuarios" },
-      {
-        title: "Entidades",
-        icon: "mdi-office-building-outline",
-        path: "/entidades",
-      },
-      { title: "Datos", icon: "mdi-database-cog", path: "/datos" },
-    ],
   }),
-
-  watch: {
-    group() {
-      this.drawer = false;
-    },
-  },
 
   methods: {
     logout() {
