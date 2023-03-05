@@ -1,5 +1,15 @@
 <template>
-  <v-container fluid class="primary fill-height">
+  <v-container
+    fluid
+    class="primary fill-height"
+    :style="{
+      'background-image': 'url(' + require('../assets/img/fondo.jpg') + ')',
+      'height': '100%',
+      'background-position': 'center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+    }"
+  >
     <v-row>
       <v-col>
         <v-container>
