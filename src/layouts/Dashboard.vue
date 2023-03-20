@@ -20,7 +20,7 @@
               sm="12"
               class="text-center text-h3 pa-12"
             >
-              Bienvenido al Sistema Estadístico
+              Sistema De Eventos Academicos
             </v-col>
           </v-row>
           <v-row>
@@ -32,8 +32,8 @@
                   cover
                 ></v-img>
                 <v-card-actions>
-                  <v-btn variant="text" block :to="{ name: 'enviar_datos' }"
-                    >Enviar Datos</v-btn
+                  <v-btn variant="text" block :to="{ name: 'graficos' }"
+                    >Enviar Evento</v-btn
                   >
                 </v-card-actions>
               </v-card>
@@ -46,15 +46,13 @@
                   cover
                 ></v-img>
                 <v-card-actions class="text-center">
-                  <v-btn variant="text" block>Ver Reportes</v-btn>
+                  <v-btn variant="text" block>Ver Graficos</v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
           </v-row>
           <v-row>
             <v-col class="text-center">
-              <div>Derechos Reservados - Empresa - 2023</div>
-              <div><a href="">www.empresa.com</a></div>
             </v-col>
           </v-row>
         </v-container>

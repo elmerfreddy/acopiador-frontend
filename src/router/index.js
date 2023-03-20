@@ -8,17 +8,17 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("../components/LoginView.vue"),
+    component: () => import("../components/SistemaEventosAcademico/LoginView.vue"),
   },
   {
     path: "/recover",
     name: "recover",
-    component: () => import("../components/RecoverView.vue"),
+    component: () => import("../components/SistemaEventosAcademico/RecoverView.vue"),
   },
   {
     path: "/retrieve",
     name: "retrieve",
-    component: () => import("../components/RetrieveView.vue"),
+    component: () => import("../components/SistemaEventosAcademico/RetrieveView.vue"),
   },
   {
     path: "/dashboard",
@@ -28,27 +28,40 @@ const routes = [
   {
     path: "/usuarios",
     name: "usuarios",
-    component: () => import("../components/Usuario.vue"),
+    component: () => import("../components/SistemaEventosAcademico/Usuario.vue"),
+  },
+  
+  
+  //281
+  {
+    path: '/evento',
+    name: 'evento',
+    component: () => import(/* webpackChunkName: "enviar_datos" */ '../components/SistemaEventosAcademico/Eventos.vue')
   },
   {
-    path: "/entidades",
-    name: "entidades",
-    component: () => import("../components/Entidad.vue"),
+    path: '/infraestructura',
+    name: 'infraestructura',
+    component: () => import(/* webpackChunkName: "enviar_datos" */ '../components/SistemaEventosAcademico/Infraestructura.vue')
   },
   {
-    path: '/dato',
-    name: 'dato',
-    component: () => import(/* webpackChunkName: "dato" */ '../components/DatoTabs.vue')
-  }, 
-  {
-    path: '/datos',
-    name: 'datos',
-    component: () => import(/* webpackChunkName: "datos" */ '../components/Datos.vue')
+    path: '/comentario',
+    name: 'comentario',
+    component: () => import(/* webpackChunkName: "enviar_datos" */ '../components/SistemaEventosAcademico/Comentarios.vue')
   },
   {
-    path: '/enviar_datos',
-    name: 'enviar_datos',
-    component: () => import(/* webpackChunkName: "enviar_datos" */ '../components/DatosEnviar.vue')
+    path: '/graficos',
+    name: 'graficos',
+    component: () => import(/* webpackChunkName: "enviar_datos" */ '../components/SistemaEventosAcademico/Graficos.vue')
+  },
+  {
+    path: '/paginaweb',
+    name: 'paginaweb',
+    component: () => import(/* webpackChunkName: "enviar_datos" */ '../components/PaginaPrincipal.vue')
+  },
+  {
+    path: '/avatar',
+    name: 'avatar',
+    component: () => import(/* webpackChunkName: "enviar_datos" */ '../components/Avatar.vue')
   },
 ]
 

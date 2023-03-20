@@ -4,7 +4,7 @@
       variant="text"
       @click.stop="drawer = !drawer"
     ></v-app-bar-nav-icon>
-    <v-toolbar-title>Sistema Reportes Estadísticos</v-toolbar-title>
+    <v-toolbar-title>Sistema Eventos Academicos</v-toolbar-title>
     <v-spacer></v-spacer>
     <template v-slot:append v-if="$store.state.usuario">
       <div class="pa-2">
@@ -12,7 +12,7 @@
       </div>
     </template>
   </v-app-bar>
-
+  
   <v-navigation-drawer v-model="drawer" location="left" color="grey-lighten-4">
     <v-list v-model:opened="open" nav>
       <v-list-item
@@ -104,18 +104,10 @@ export default {
     open: [],
     admins: [
       ["Usuarios", "mdi-account-multiple-outline", { name: "usuarios" }],
-      ["Entidades", "mdi-office-building", { name: "entidades" }],
-    ],
-    datos: [
-      ["Datos de entrada", "mdi-plus-outline", { name: "datos" }],
-      ["Enviar datos entrada", "mdi-file-outline"],
-      ["Formulario registro", "mdi-update"],
-      ["Datos validados", "mdi-file-check"],
-      ["Enviar datos", "mdi-send", { name: "enviar_datos" }],
-    ],
-    reportes: [
-      ["Reporte 1", "mdi-chart-bar"],
-      ["Reporte 2", "mdi-chart-pie"],
+      ["Eventos", "mdi mdi-calendar-text", { name: "evento" }],
+      ["Infraestructura", "mdi-office-building", { name: "infraestructura" }],
+      ["Comentarios", "mdi-comment-account", { name: "comentario" }],
+      ["Graficos", "mdi-image-multiple", { name: "graficos" }],
     ],
     drawer: true,
   }),

@@ -7,7 +7,7 @@
   >
     <template v-slot:top>
       <v-toolbar>
-        <v-toolbar-title>Lista de Usuarios</v-toolbar-title>
+        <v-toolbar-title><h2>Lista de Usuarios</h2></v-toolbar-title>
       </v-toolbar>
       <v-toolbar flat>
         <v-dialog v-model="dialog" max-width="500px">
@@ -62,20 +62,8 @@
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.celular"
-                      label="Celular"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      v-model="editedItem.entidad"
-                      label="Entidad"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      v-model="editedItem.cargo"
-                      label="Cargo"
+                      v-model="editedItem.rol"
+                      label="Rol"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -148,8 +136,8 @@
               </v-col>
               <v-col>
                 <v-text-field
-                  v-model="muestraItem.cargo"
-                  label="Cargo"
+                  v-model="muestraItem.rol"
+                  label="Rol"
                   readonly
                 ></v-text-field>
               </v-col>
@@ -195,7 +183,7 @@ export default {
         title: "Apellido(s)",
       },
       { title: "Email", key: "email" },
-      { title: "Entidad", key: "entidad" },
+      { title: "Rol", key: "rol" },
       { title: "Acciones", key: "actions", sortable: false },
     ],
     usuarios: [],
@@ -205,7 +193,7 @@ export default {
       apellido: "",
       email: "",
       celular: "",
-      entidad: "",
+      rol: "",
       cargo: "",
     },
     defaultItem: {
@@ -213,13 +201,13 @@ export default {
       apellido: "",
       email: "",
       celular: "",
-      entidad: "",
+      rol: "",
       cargo: "",
     },
     muestraItem: {
       nombre: "",
       apellido: "",
-      cargo: "",
+      rol: "",
     },
   }),
 

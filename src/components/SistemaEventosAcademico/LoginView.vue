@@ -42,14 +42,6 @@
             <router-link to="/recover">Olvidó su contraseña?</router-link>
           </v-form>
         </v-card>
-        <v-img
-          lazy-src="@/assets/img/logomaker.jpg"
-          max-height="63"
-          max-width="500"
-          src="@/assets/img/logomaker.jpg"
-          class="mt-8"
-        >
-        </v-img>
       </v-col>
     </v-main>
   </v-app>
@@ -62,7 +54,7 @@ export default {
   data: () => ({
     passwordShow: false,
     form: {
-      usuario: "juan.perez@gmail.com",
+      usuario: "daynor.cori@gmail.com",
       password: "123456",
     },
   }),
@@ -79,7 +71,7 @@ export default {
       } catch (error) {
         console.error(error);
       }*/
-      this.$store.commit("login", "Juan Perez");
+      this.$store.commit("login", "Daynor Cori");
       this.$store.commit("setToken", "abcdefghijk.12345678890.abcdefghijk");
       this.$router.replace({ name: "dashboard" });
       e.preventDefault();

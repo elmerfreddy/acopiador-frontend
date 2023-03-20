@@ -1,4 +1,5 @@
 <template>
+  <section>
   <v-data-table
     :headers="headers"
     :items="entidades"
@@ -7,7 +8,7 @@
   >
     <template v-slot:top>
       <v-toolbar>
-        <v-toolbar-title>Lista de Entidades</v-toolbar-title>
+        <v-toolbar-title><h2>Infraestructura</h2></v-toolbar-title>
       </v-toolbar>
       <v-toolbar flat>
         <v-dialog v-model="dialog" max-width="500px">
@@ -41,34 +42,31 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field
-                      v-model="editedItem.nombre"
+                      v-model="editedItem.name"
                       label="Nombre"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field
-                      v-model="editedItem.sigla"
-                      label="Sigla"
+                      v-model="editedItem.direccion"
+                      label="Dirección"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field
-                      v-model="editedItem.estado"
-                      label="Estado"
+                      v-model="editedItem.tipo"
+                      label="Tipo"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field
+                      v-model="editedItem.capacidad"
+                      label="Capacidad"
                     ></v-text-field>
                   </v-col>
                 </v-row>
-                <v-combobox
-                  label="Nivel de Acceso"
-                  :items="[
-                    'Nivel 1 - Administrador',
-                    'Nivel 2 - Acceder a toda la información',
-                    'Nivel 3 - Datos de su entidad',
-                  ]"
-                >
-                </v-combobox>
               </v-container>
             </v-card-text>
 
@@ -86,8 +84,7 @@
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
             <v-card-title class="text-h5"
-              >¿Está seguro de eliminar la entidad?</v-card-title
-            >
+              >¿Está seguro de eliminar la infreestructura?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue-darken-1" variant="text" @click="closeDelete"
@@ -106,59 +103,6 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-dialog max-width="500px">
-        <template v-slot:activator="{ props }">
-          <v-icon
-            size="small"
-            class="me-2"
-            v-bind="props"
-            @click="permisosItem(item.raw)"
-          >
-            mdi-key
-          </v-icon>
-        </template>
-        <v-card max-width="400">
-          <v-card-title>Otorgar Permisos</v-card-title>
-
-          <v-col align-self="center">
-            <v-card-text class="mt-0">
-              <v-col>
-                <v-text-field
-                  v-model="entidadItem.nombre"
-                  label="Entidad"
-                  readonly
-                ></v-text-field>
-              </v-col>
-              <v-col>
-                <v-combobox
-                  label="Conjuntos de datos"
-                  :items="[
-                    'Estadistica de Edades',
-                    'Población de varones',
-                    'Población de mujeres',
-                    'Población de niños',
-                    'Población de adolescentes',
-                    'Generacional (género)',
-                    'Etnia',
-                  ]"
-                >
-                </v-combobox>
-              </v-col>
-              <v-col>
-                <v-combobox
-                  label="Nivel de desagregación"
-                  :items="['Nacional', 'Departamental', 'Municipal']"
-                >
-                </v-combobox>
-              </v-col>
-              <v-card-actions class="justify-center">
-                <v-btn color="primary" variant="elevated"> Guardar </v-btn>
-              </v-card-actions>
-            </v-card-text>
-          </v-col>
-        </v-card>
-      </v-dialog>
-
       <v-icon size="small" class="me-2" @click="editItem(item.raw)">
         mdi-pencil
       </v-icon>
@@ -169,11 +113,10 @@
       <v-btn color="primary" @click="initialize"> Reestablecer </v-btn>
     </template>
   </v-data-table>
+</section>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data: () => ({
     dialog: false,
@@ -183,44 +126,45 @@ export default {
     headers: [
       {
         align: "start",
-        key: "nombre",
+        key: "name",
         sortable: false,
         title: "Nombre",
       },
       {
         align: "start",
-        key: "sigla",
+        key: "direccion",
         sortable: false,
-        title: "Sigla",
+        title: "Dirección",
       },
-      { title: "Estado", key: "estado" },
+      { title: "Tipo", key: "tipo" },
+      { title: "Capacidad", key: "capacidad" },
       { title: "Acciones", key: "actions", sortable: false },
     ],
     entidades: [],
     editedIndex: -1,
     editedItem: {
-      id: "",
-      nombre: "",
-      sigla: "",
-      estado: "",
+      name: "",
+      direccion: "",
+      tipo: "",
+      capacidad: "",
     },
     defaultItem: {
-      id: "",
-      nombre: "",
-      sigla: "",
-      estado: "",
+      name: "",
+      direccion: "",
+      tipo: "",
+      capacidad: "",
     },
     entidadItem: {
-      id: "",
-      nombre: "",
-      sigla: "",
-      estado: "",
+      name: "",
+      direccion: "",
+      tipo: "",
+      capacidad: "",
     },
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nuevo Entidad" : "Editar Entidad";
+      return this.editedIndex === -1 ? "Nuevo Infreestructura" : "Editar Infreestructura";
     },
   },
 
@@ -248,23 +192,29 @@ export default {
     },*/
     initialize() {
       this.entidades = [
-        {
-          id: 1,
-          nombre: "Entidad 1",
-          sigla: "E1",
-          estado: "ACTIVO",
+      {
+          name: 'Curso Hemorragias STB',
+          direccion: 'Zona Avaroa',
+          tipo: 'Edificio',
+          capacidad: 100,
         },
         {
-          id: 2,
-          nombre: "Entidad 2",
-          sigla: "E2",
-          estado: "ACTIVO",
+          name: 'Jornada de Capacitación ',
+          direccion: 'Av. montes',
+          tipo: 'Coliseo',
+          capacidad: 100,
         },
         {
-          id: 3,
-          nombre: "Entidad 3",
-          sigla: "E3",
-          estado: "ACTIVO",
+          name: 'Congreso universitario de ciencias',
+          direccion: 'av. Civica',
+          tipo: 'Complejo deportivo',
+          capacidad: 50,
+        },
+        {
+          name: 'Resurgimiento de nuevos lideres ',
+          direccion: 'Esquina Zagarnaga',
+          tipo: 'Pabellon E',
+          capacidad: 200,
         },
       ];
     },
